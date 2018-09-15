@@ -39,7 +39,7 @@ OR
 Grab from docker hub if you don't have the image
 
 ```bash
-docker pull nolim1t/mini-bitcoind
+docker pull nolim1t/mini-bitcoind:x86_64_201809151809
 ```
 
 ## Starting
