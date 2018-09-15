@@ -1,1 +1,1 @@
-docker build -t nolim1t/financial-independance ./bitcoind
+docker build -t nolim1t/mini-bitcoind ./bitcoind
