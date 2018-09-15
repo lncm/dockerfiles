@@ -40,7 +40,7 @@ docker run -v /local/path/to/data:/data \
 
 Basically the above maps a local folder to data. This stores the bitcoin.conf which should be in a folder called **/btc** inside the data folder. Will try to simplify this later.
 
-Also maps RPC to 8334 and P2P to 8335
+Also maps RPC to 8332 (8334 inside docker) and P2P to 8333 (8336 inside docker)
 
 ## Stopping
 
