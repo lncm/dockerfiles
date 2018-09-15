@@ -32,8 +32,8 @@ docker build -t nolim1t/mini-bitcoind ./bitcoind
 
 ```bash
 docker run -v /local/path/to/data:/data \
--p 8334:8332 \
--p 8335:8333 \
+-p 8332:8334 \
+-p 8333:8336 \
 --name beyourownbank \
 -d=true nolim1t/mini-bitcoind
 ```
