@@ -8,19 +8,23 @@ Idea behind this is to have a easy configurable bitcoind in a secure fashion.
 
 Eventually, I'd want to incorporate lightningd too, maybe doing a compose file.
 
-## Building
+## Building / BUIDL
+
+From the project root
 
 ```bash
-./build.sh
+docker build -t nolim1t/mini-bitcoind ./bitcoind
 ```
 
 ## Starting
+
+### Bitcoind
 
 ```bash
 docker run -v /local/path/to/data:/data \
 -p 8334:8332 \
 -p 8335:8333 \
---name financial-independance \
+--name beyourownbank \
 -d=true nolim1t/mini-bitcoind
 ```
 
@@ -31,8 +35,8 @@ Also maps RPC to 8334 and P2P to 8335
 ## Stopping
 
 ```bash
-docker stop financial-independance
-docker rm financial-independance
+docker stop beyourownbank
+docker rm beyourownbank
 ```
 
 This stops and cleans up the service.
