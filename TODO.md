@@ -1,0 +1,4 @@
+- [ ] bitcoind: Make pre-built image for ARM architecture
+- [ ] lightningd: Make a lightningd image (x86 arch)
+- [ ] lightningd: Make a lightningd image (arm arch)
+- [ ] lnd: Make a LND instance
