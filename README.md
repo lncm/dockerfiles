@@ -48,16 +48,24 @@ docker pull nolim1t/mini-bitcoind:x86_64_201809151809
 ### Bitcoind
 
 ```bash
+# For x86 Architecture
+
 docker run -v /local/path/to/data:/data \
 -p 8332:8334 \
 -p 8333:8336 \
 --name beyourownbank \
--d=true nolim1t/mini-bitcoind
+-d=true nolim1t/mini-bitcoind:x86_64_201809151809
 ```
 
 Basically the above maps a local folder to data. This stores the bitcoin.conf which should be in a folder called **/btc** inside the data folder. Will try to simplify this later.
 
 Also maps RPC to 8332 (8334 inside docker) and P2P to 8333 (8336 inside docker)
+
+## Interactive shell
+
+```bash
+docker exec -it beyourownbank basj
+```
 
 ## Stopping
 
