@@ -40,3 +40,8 @@ docker rm beyourownbank
 ```
 
 This stops and cleans up the service.
+
+## Conclusion
+
+![buy btc](https://gitlab.com/nolim1t/financial-independence/raw/62573d151635e0170711bd9a7d45bb7e93299e2a/buybtc.png)
+
