@@ -6,13 +6,21 @@
 
 This docker file installs all the dependencies and bitcoind, then runs it.
 
-Idea behind this is to have a easy configurable bitcoind in a secure fashion.
+Idea behind this is to have a easy configurable bitcoind almost as an easy install.
 
-Eventually, I'd want to incorporate lightningd too, maybe doing a compose file.
+Eventually, I'd want to incorporate [lightningd](https://github.com/ElementsProject/lightning) or [LND](https://github.com/lightningnetwork/lnd) too, maybe doing a compose file.
+
+## Cleanup all images
+
+From the project root
+
+```bash
+./clean.sh
+```
 
 ## Building / BUIDL
 
-From the project root
+From the project root. This builds whatever is in the folder **bitcoind** and tags it as **nolim1t/mini-bitcoind** (you may change this tag by the way, however it doesn't matter unless you plan to push to docker hub. In all open source spirit, please share your code if you do. Thanks)
 
 ```bash
 docker build -t nolim1t/mini-bitcoind ./bitcoind
