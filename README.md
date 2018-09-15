@@ -12,10 +12,18 @@ Eventually, I'd want to incorporate [lightningd](https://github.com/ElementsProj
 
 ## Cleanup all images
 
+Make sure there is NOTHING running before you cleanup. 
+
 From the project root
 
 ```bash
 ./clean.sh
+```
+
+OR if you don't have this project
+
+```bash
+curl "https://gitlab.com/nolim1t/financial-independence/raw/master/clean.sh" 2>/dev/null | sh
 ```
 
 ## Building / BUIDL
@@ -24,6 +32,14 @@ From the project root. This builds whatever is in the folder **bitcoind** and ta
 
 ```bash
 docker build -t nolim1t/mini-bitcoind ./bitcoind
+```
+
+OR
+
+Grab from docker hub if you don't have the image
+
+```bash
+docker pull nolim1t/mini-bitcoind
 ```
 
 ## Starting
