@@ -39,6 +39,7 @@ OR
 Grab from docker hub if you don't have the image
 
 ```bash
+# if x86 Arch
 docker pull nolim1t/mini-bitcoind:x86_64_201809151809
 ```
 
