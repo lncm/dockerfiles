@@ -1,5 +1,7 @@
 # Financial Independence Docker build
 
+![Irrelephant](https://gitlab.com/nolim1t/financial-independence/raw/master/irrelephant.png)
+
 ## What
 
 This docker file installs all the dependencies and bitcoind, then runs it.
