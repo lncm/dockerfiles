@@ -5,18 +5,22 @@ services:
         volumes:
             - /path/to/btc-data:/data
         ports:
-            - "8332:8334"
-            - "8333:8336"
+            - "8332:8332"
+            - "8333:8333"
         networks:
             localnet:
                 ipv4_address: 172.16.1.5
                 ipv6_address: 2001:3984:1337::5
     paymentprocessor:
-        build: ./lightningd
+        image: nolim1t/lightningd:x86_64-201809161814
         volumes:
             - /path/to/btc-data:/data
         ports:
-            - "9735:9737"
+            - "9735:9735"
+        environment:
+            - RPCHOST=172.16.1.5
+            - RPCUSER=btcuser
+            - RPCPASSWORD=defaultpassword
         networks:
             localnet:
                 ipv4_address: 172.16.1.10
