@@ -50,7 +50,8 @@ docker pull nolim1t/mini-bitcoind:x86_64_201809151809
 ```bash
 # For x86 Architecture
 
-docker run -v /local/path/to/data:/data \
+docker run --rm \
+-v /local/path/to/data:/data \
 -p 8332:8334 \
 -p 8333:8336 \
 --name beyourownbank \
