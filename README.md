@@ -64,7 +64,7 @@ Also maps RPC to 8332 (8334 inside docker) and P2P to 8333 (8336 inside docker)
 ## Interactive shell
 
 ```bash
-docker exec -it beyourownbank basj
+docker exec -it beyourownbank bash
 ```
 
 ## Stopping
