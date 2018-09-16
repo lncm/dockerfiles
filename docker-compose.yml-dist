@@ -15,3 +15,13 @@ services:
             - "9735:9737"
         depends_on:
             - beyourownbank
+networks:
+    localnet:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                -
+                    subnet: 172.16.1.0/24
+                -
+                    subnet: 2001:3984:1337::/64
