@@ -39,7 +39,7 @@ docker build -t nolim1t/lightningd ./lightningd
 
 OR
 
-Grab from docker hub if you don't have the image
+Grab from docker hub if you don't have the image and don't want to spend hours compiling
 
 ```bash
 # if x86 Arch
