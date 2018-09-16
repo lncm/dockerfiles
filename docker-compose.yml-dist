@@ -1,0 +1,17 @@
+version: '3'
+services:
+    beyourownbank:
+        image: nolim1t/mini-bitcoind:x86_64_201809151809
+        volumes:
+            - /path/to/btc-data:/data
+        ports:
+            - "8332:8334"
+            - "8333:8336"
+    paymentprocessor:
+        build: ./lightningd
+        volumes:
+            - /path/to/btc-data:/data
+        ports:
+            - "9735:9737"
+        depends_on:
+            - beyourownbank
