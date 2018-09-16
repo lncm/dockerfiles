@@ -7,12 +7,20 @@ services:
         ports:
             - "8332:8334"
             - "8333:8336"
+        networks:
+            localnet:
+                ipv4_address: 172.16.1.5
+                ipv6_address: 2001:3984:1337::5
     paymentprocessor:
         build: ./lightningd
         volumes:
             - /path/to/btc-data:/data
         ports:
             - "9735:9737"
+        networks:
+            localnet:
+                ipv4_address: 172.16.1.10
+                ipv6_address: 2001:3984:1337::10
         depends_on:
             - beyourownbank
 networks:
