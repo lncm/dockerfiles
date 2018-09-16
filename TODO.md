@@ -2,3 +2,4 @@
 - [ ] lightningd: Make a lightningd image (x86 arch)
 - [ ] lightningd: Make a lightningd image (arm arch)
 - [ ] lnd: Make a LND instance
+- [ ] Make docker compose file with dependencies
