@@ -10,7 +10,6 @@ RUN apt-get -yq upgrade
 RUN apt-get install -yq build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils python3 libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-test-dev libboost-thread-dev libzmq3-dev jq pwgen libboost-all-dev git software-properties-common wget unzip autoconf automake libzmq3-dev
 RUN apt-get install -yq autoconf automake build-essential git libtool libgmp-dev libsqlite3-dev python python3 net-tools zlib1g-dev 
 
-
 # Build and Install Berkley DB 4.8.30
 RUN cd /
 RUN mkdir source
@@ -55,11 +54,13 @@ RUN make install
 
 # bitcoin-cli path = /usr/local/bitcoin/bin/bitcoin-cli
 
-EXPOSE 9737
+EXPOSE 9735
+
+RUN export PATH=/usr/local/bin:/usr/local/bitcoin/bin
 
 # Run bitcoind where we built it
 # $RPCUSER, $RPCPASSWORD, $RPCHOST
-CMD ["/usr/local/bin/lightningd", "--mainnet", "--bitcoin-cli /usr/local/bitcoin/bin/bitcoin-cli", "--bitcoin-rpcuser $RPCUSER", "--bitcoin-rpcpassword $RPCPASSWORD", "--bitcoin-rpcconnect $RPCHOST", "--lightning-dir=/data/lightningd", "--daemon", "--autocleaninvoice-cycle 7200", "autocleaninvoice-expired-by 14400"]
+CMD ["/usr/local/bin/lightningd", "--lightning-dir=/data/lightning"]
 
 
 
