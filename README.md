@@ -31,7 +31,10 @@ curl "https://gitlab.com/nolim1t/financial-independence/raw/master/clean.sh" 2>/
 From the project root. This builds whatever is in the folder **bitcoind** and tags it as **nolim1t/mini-bitcoind** (you may change this tag by the way, however it doesn't matter unless you plan to push to docker hub. In all open source spirit, please share your code if you do. Thanks)
 
 ```bash
+# bitcoind
 docker build -t nolim1t/mini-bitcoind ./bitcoind
+# Lightningd
+docker build -t nolim1t/lightningd ./lightningd
 ```
 
 OR
@@ -41,6 +44,7 @@ Grab from docker hub if you don't have the image
 ```bash
 # if x86 Arch
 docker pull nolim1t/mini-bitcoind:x86_64_201809151809
+docker pull nolim1t/lightningd:x86_64-201809161814
 ```
 
 ## Starting
@@ -52,15 +56,13 @@ docker pull nolim1t/mini-bitcoind:x86_64_201809151809
 
 docker run --rm \
 -v /local/path/to/data:/data \
--p 8332:8334 \
--p 8333:8336 \
+-p 8332:8332 \
+-p 8333:8333 \
 --name beyourownbank \
 -d=true nolim1t/mini-bitcoind:x86_64_201809151809
 ```
 
 Basically the above maps a local folder to data. This stores the bitcoin.conf which should be in a folder called **/btc** inside the data folder. Will try to simplify this later.
-
-Also maps RPC to 8332 (8334 inside docker) and P2P to 8333 (8336 inside docker)
 
 ## Interactive shell
 
