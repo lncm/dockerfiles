@@ -17,5 +17,5 @@ disablewallet=1
 listen=1
 bind=0.0.0.0
 
-port=8336
-rpcport=8334
+port=8333
+rpcport=8332
