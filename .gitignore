@@ -2,3 +2,4 @@ build.sh
 start.sh
 stop.sh
 data/
+docker-compose.yml
