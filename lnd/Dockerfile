@@ -3,7 +3,7 @@ FROM golang:1.10-alpine as builder
 MAINTAINER nolim1t <nolim1t.co>
 
 # Copy in the local repository to build from, and also get git
-RUN apt-get install -yq git
+RUN apk add --no-cache git make
 RUN mkdir -p /go/src/github.com/lightningnetwork
 WORKDIR /go/src/github.com/lightningnetwork
 RUN git clone https://github.com/lightningnetwork/lnd.git
@@ -13,10 +13,7 @@ RUN git clone https://github.com/lightningnetwork/lnd.git
 ENV GODEBUG netdns=cgo
 
 # Install dependencies and install/build lnd.
-RUN apk add --no-cache \
-    git \
-    make \
-&&  cd /go/src/github.com/lightningnetwork/lnd \
+RUN cd /go/src/github.com/lightningnetwork/lnd \
 &&  make \
 &&  make install
 
