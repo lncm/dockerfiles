@@ -63,7 +63,7 @@ exec lnd \
     "--$BACKEND.rpchost"="$RPCHOST" \
     "--$BACKEND.rpcuser"="$RPCUSER" \
     "--$BACKEND.rpcpass"="$RPCPASS" \
-    "--zmqpubrawblock=tcp://$ZMQPUBRAWBLOCK" \
-    "--zmqpubrawtx=tcp://$ZMQPUBRAWTX" \
+    "--bitcoind.zmqpubrawblock=tcp://$ZMQPUBRAWBLOCK" \
+    "--bitcoind.zmqpubrawtx=tcp://$ZMQPUBRAWTX" \
     --debuglevel="$DEBUG" \
     "$@"
