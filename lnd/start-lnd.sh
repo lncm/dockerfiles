@@ -39,6 +39,7 @@ set_default() {
 }
 
 # Set default variables if needed.
+ALIAS=$(set_default "$ALIAS" "#lncmreckless")
 RPCUSER=$(set_default "$RPCUSER" "devuser")
 RPCPASS=$(set_default "$RPCPASS" "devpass")
 RPCHOST=$(set_default "$RPCHOST" "localhost")
@@ -47,7 +48,7 @@ ZMQPUBRAWBLOCK=$(set_default "$ZMQPUBRAWBLOCK" "127.0.0.1:28332")
 ZMQPUBRAWTX=$(set_default "$ZMQPUBRAWTX" "127.0.0.1:28333")
 
 DEBUG=$(set_default "$DEBUG" "debug")
-NETWORK=$(set_default "$NETWORK" "simnet")
+NETWORK=$(set_default "$NETWORK" "mainnet")
 CHAIN=$(set_default "$CHAIN" "bitcoin")
 BACKEND="bitcoind"
 if [[ "$CHAIN" == "litecoin" ]]; then
@@ -57,6 +58,7 @@ fi
 exec lnd \
     --noseedbackup \
     --logdir="/data" \
+    "--alias=$ALIAS" \
     "--$CHAIN.active" \
     "--$CHAIN.$NETWORK" \
     "--$CHAIN.node"="bitcoind" \
@@ -65,5 +67,9 @@ exec lnd \
     "--$BACKEND.rpcpass"="$RPCPASS" \
     "--bitcoind.zmqpubrawblock=tcp://$ZMQPUBRAWBLOCK" \
     "--bitcoind.zmqpubrawtx=tcp://$ZMQPUBRAWTX" \
+    "--rpclisten=0.0.0.0:10009" \
+    "--rpclisten=127.0.0.1:10008" \
+    "--restlisten=0.0.0.0:8080" \
+    "--listen=0.0.0.0:10008" \
     --debuglevel="$DEBUG" \
     "$@"
