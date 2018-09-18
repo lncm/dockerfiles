@@ -44,8 +44,8 @@ RUN make install
 # More for debugging
 RUN apt-get install -yq netcat
 
-# Expose ports 8334 (RPC), and 8336 (P2P)
-EXPOSE 8334 8336
+# Expose ports 8333 (RPC), and 8332 (P2P) and zmq ports
+EXPOSE 8332 8333 28332 28333
 
 # Run bitcoind where we built it
-CMD ["/usr/local/bitcoin/bin/bitcoind","-datadir=/data/btc"]
+CMD ["/usr/local/bitcoin/bin/bitcoind","-datadir=/data/btc", "-zmqpubrawblock=tcp://0.0.0.0:28332", "-zmqpubrawtx=tcp://0.0.0.0:28333"]
