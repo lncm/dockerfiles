@@ -3,7 +3,11 @@ MAINTAINER nolim1t <hello@nolim1t.co>
 
 # This maybe different if building on another CPU
 # on RPI change this to /usr/lib/arm-linux-gnueabihf
+# Pick one which applies
+
 ENV BOOSTDIR /usr/lib/x86_64-linux-gnu
+#ENV BOOSTDIR /usr/lib/arm-linux-gnueabihf
+
 
 # Install dependencies (boost/zmq)
 RUN apt-get -y -yqq update
