@@ -47,7 +47,7 @@ docker pull nolim1t/mini-bitcoind:x86_64_201809151809
 docker pull nolim1t/lightningd:x86_64-201809161814
 
 # If ARM 64 Architecture (raspberry pi)
-docker pull nolim1t/mini-bitcoind:arm_20180918
+docker pull nolim1t/mini-bitcoind:arm_2018091801
 ```
 
 ## Starting
