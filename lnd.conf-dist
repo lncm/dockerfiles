@@ -1,0 +1,193 @@
+[Application Options]
+
+datadir=/lnd/data
+logdir=/lnd/logs
+maxlogfiles=3
+maxlogfilesize=10
+
+tlscertpath=/lnd/tls.cert
+tlskeypath=/lnd/tls.key
+
+; Adds an extra ip to the generated certificate
+; (old tls files must be deleted if changed)
+; tlsextraip=
+
+; Adds an extra domain to the generate certificate
+; (old tls files must be deleted if changed)
+; tlsextradomain=
+
+; Disable macaroon authentication. Macaroons are used are bearer credentials to
+; authenticate all RPC access. If one wishes to opt out of macaroons, uncomment
+; the line below.
+; no-macaroons=true
+
+adminmacaroonpath=/lnd/admin.macaroon
+readonlymacaroonpath=/lnd/readonly.macaroon
+invoicemacaroonpath=/lnd/invoice.macaroon
+
+
+listen=0.0.0.0:9735
+restlisten=localhost:8080
+externalip=wujw3bevctuh6apd.onion
+debuglevel=debug
+
+; The maximum number of incoming pending channels permitted per peer.
+; maxpendingchannels=1
+
+; If true, then automatic network bootstrapping will not be attempted. This
+; means that your node won't attempt to automatically seek out peers on the
+; network.
+nobootstrap=1
+noencryptwallet=1
+alias=lncm-nl-mainnet-1
+
+
+[Bitcoin]
+bitcoin.active=1
+bitcoin.testnet=0
+bitcoin.mainnet=1
+bitcoin.node=bitcoind
+
+
+
+
+[Btcd]
+; btcd.rpchost=localhost
+; btcd.rpcuser=kek
+; btcd.rpcpass=kek
+; btcd.rpccert=~/.btcd/rpc.cert
+
+
+[Bitcoind]
+bitcoind.rpchost=localhost:8332
+bitcoind.rpcuser=kek
+bitcoind.rpcpass=kek
+bitcoind.zmqpubrawblock=tcp://localhost:28332
+bitcoind.zmqpubrawtx=tcp://localhost:28333
+
+
+[neutrino]
+; neutrino.connect=
+
+; Add a peer to connect with at startup.
+; neutrino.addpeer=
+
+; Mainnet BTCD
+; neutrino.addpeer=176.9.113.254:8333
+; neutrino.addpeer=5.9.87.7:8333
+; neutrino.addpeer=54.36.61.219:8333
+; neutrino.addpeer=148.251.76.109:8333
+; neutrino.addpeer=75.130.68.210:8333
+; neutrino.addpeer=173.249.26.13:8333
+; neutrino.addpeer=138.68.244.82:8333
+; neutrino.addpeer=81.169.139.77:9506
+; neutrino.addpeer=45.55.47.17:8333
+; neutrino.addpeer=167.99.127.52:8333
+; neutrino.addpeer=167.99.232.110:8333
+; neutrino.addpeer=82.119.233.36:8333
+; neutrino.addpeer=89.238.166.235:5158
+; neutrino.addpeer=45.33.44.212:8333
+; neutrino.addpeer=165.227.7.29:8333
+; neutrino.addpeer=80.98.24.110:8333
+' neutrino.addpeer=87.73.127.230:8333
+' neutrino.addpeer=178.128.165.102:8333
+
+[Litecoin]
+
+; If the Litecoin chain should be active. Atm, only a single chain can be
+; active.
+; litecoin.active=1
+
+; Use Litecoin's test network.
+; litecoin.testnet=1
+
+; Use the ltcd back-end
+litecoin.node=ltcd
+
+; Use the litecoind back-end
+; litecoin.node=litecoind
+
+
+[Ltcd]
+
+; The host that your local ltcd daemon is listening on. By default, this
+; setting is assumed to be localhost with the default port for the current
+; network.
+; ltcd.rpchost=localhost
+
+; Username for RPC connections to ltcd. By default, lnd will attempt to
+; automatically obtain the credentials, so this likely won't need to be set
+; (other than for simnet mode).
+; ltcd.rpcuser=kek
+
+; Password for RPC connections to ltcd. By default, lnd will attempt to
+; automatically obtain the credentials, so this likely won't need to be set
+; (other than for simnet mode).
+; ltcd.rpcpass=kek
+
+; File containing the daemon's certificate file. This only needs to be set if
+; the node isn't on the same host as lnd.
+; ltcd.rpccert=~/.ltcd/rpc.cert
+
+; The raw bytes of the daemon's PEM-encoded certificate chain which will be used
+; to authenticate the RPC connection. This only needs to be set if the ltcd
+; node is on a remote host.
+; ltcd.rawrpccert=
+
+
+[Litecoind]
+
+; The host that your local litecoind daemon is listening on. By default, this
+; setting is assumed to be localhost with the default port for the current
+; network.
+; litecoind.rpchost=localhost
+
+; Username for RPC connections to litecoind. By default, lnd will attempt to
+; automatically obtain the credentials, so this likely won't need to be set
+; (other than for a remote litecoind instance).
+; litecoind.rpcuser=kek
+
+; Password for RPC connections to litecoind. By default, lnd will attempt to
+; automatically obtain the credentials, so this likely won't need to be set
+; (other than for a remote litecoind instance).
+; litecoind.rpcpass=kek
+
+; ZMQ socket which sends rawblock and rawtx notifications from litecoind. By
+; default, lnd will attempt to automatically obtain this information, so this
+; likely won't need to be set (other than for a remote litecoind instance).
+; litecoind.zmqpubrawblock=tcp://127.0.0.1:28332
+; litecoind.zmqpubrawtx=tcp://127.0.0.1:28333
+
+
+[autopilot]
+
+; If the autopilot agent should be active or not. The autopilot agent will
+; attempt to automatically open up channels to put your node in an advantageous
+; position within the network graph.
+; autopilot.active=1
+
+; The maximum number of channels that should be created.
+; autopilot.maxchannels=5
+
+; The fraction of total funds that should be committed to automatic channel
+; establishment. For example 0.6 means that 60% of the total funds available
+; within the wallet should be used to automatically establish channels. The total
+; amount of attempted channels will still respect the maxchannels param.
+; autopilot.allocation=0.6
+
+[tor]
+; The port that Tor's exposed SOCKS5 proxy is listening on. Using Tor allows
+; outbound-only connections (listening will be disabled) -- NOTE port must be
+; between 1024 and 65535
+tor.socks=9050
+
+; The DNS server as IP:PORT that Tor will use for SRV queries - NOTE must have
+; TCP resolution enabled. The current active DNS sever for Testnet listening is
+; nodes.lightning.directory
+; tor.dns=nodes.lightning.directory
+
+; Enable Tor stream isolation by randomizing user credentials for each
+; connection. With this mode active, each connection will use a new circuit.
+; This means that multiple applications (other than lnd) using Tor won't be mixed
+; in with lnd's traffic.
+tor.streamisolation=1
