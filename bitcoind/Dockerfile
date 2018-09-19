@@ -7,6 +7,8 @@ MAINTAINER nolim1t <hello@nolim1t.co>
 
 ENV BOOSTDIR /usr/lib/x86_64-linux-gnu
 #ENV BOOSTDIR /usr/lib/arm-linux-gnueabihf
+
+# VER as in Version not Roger Ver
 ENV BITCOINDVER v0.16.3 # VER as in Version not Roger Ver
 
 
