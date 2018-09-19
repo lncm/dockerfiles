@@ -57,6 +57,8 @@ fi
 
 exec lnd \
     --noseedbackup \
+    --lnddir="/lnd" \
+    --configfile="/lnd/lnd.conf" \
     --logdir="/data" \
     "--alias=$ALIAS" \
     "--$CHAIN.active" \
