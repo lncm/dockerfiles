@@ -8,10 +8,6 @@ MAINTAINER nolim1t <hello@nolim1t.co>
 ENV BOOSTDIR /usr/lib/x86_64-linux-gnu
 #ENV BOOSTDIR /usr/lib/arm-linux-gnueabihf
 
-# VER as in Version not Roger Ver
-ENV BITCOINDVER v0.16.3 # VER as in Version not Roger Ver
-
-
 # Install dependencies (boost/zmq)
 RUN apt-get -y -yqq update
 RUN apt-get -yq upgrade
@@ -40,7 +36,7 @@ RUN cd /source
 RUN git clone https://github.com/bitcoin/bitcoin.git
 RUN cd bitcoin
 WORKDIR /source/bitcoin
-RUN git checkout $BITCOINDVER
+RUN git checkout v0.16.3
 RUN ./autogen.sh
 RUN mkdir -p /usr/local/bitcoin
 RUN ./configure CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib" --with-boost-libdir=$BOOSTDIR --without-gui --disable-wallet --prefix=/usr/local/bitcoin --disable-tests --disable-bench
