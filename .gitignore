@@ -2,4 +2,6 @@ build.sh
 start.sh
 stop.sh
 data/
+lnd.conf
+bitcoin.conf
 docker-compose.yml
