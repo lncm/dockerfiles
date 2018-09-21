@@ -31,10 +31,10 @@ curl "https://gitlab.com/nolim1t/financial-independence/raw/master/clean.sh" 2>/
 From the project root. This builds whatever is in the folder **bitcoind** and tags it as **nolim1t/mini-bitcoind** (you may change this tag by the way, however it doesn't matter unless you plan to push to docker hub. In all open source spirit, please share your code if you do. Thanks)
 
 ```bash
-# bitcoind
-docker build -t nolim1t/mini-bitcoind ./bitcoind/Dockerfile
+# x86 bitcoind
+docker build -t nolim1t/mini-bitcoind ./bitcoind/x86_64
 # Arm
-docker build -t nolim1t/mini-bitcoind ./bitcoind/Dockerfile.arm
+docker build -t nolim1t/mini-bitcoind ./bitcoind/arm
 
 # Lightningd
 docker build -t nolim1t/lightningd ./lightningd
