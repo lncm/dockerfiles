@@ -88,6 +88,19 @@ docker rm beyourownbank
 
 This stops and cleans up the service.
 
+## Debugging comtainers
+
+This is highly developmental so it may break. But it can be quite useful to include debug information into bug reports.
+
+To peak into the container:
+
+```bash
+docker commit last-container-id-that-crashed
+docker run -it new-container-id
+```
+
+You should be able to execute
+
 ## Conclusion
 
 ![buy btc](https://gitlab.com/nolim1t/financial-independence/raw/62573d151635e0170711bd9a7d45bb7e93299e2a/buybtc.png)
