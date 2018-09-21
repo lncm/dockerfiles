@@ -32,7 +32,10 @@ From the project root. This builds whatever is in the folder **bitcoind** and ta
 
 ```bash
 # bitcoind
-docker build -t nolim1t/mini-bitcoind ./bitcoind
+docker build -t nolim1t/mini-bitcoind ./bitcoind/Dockerfile
+# Arm
+docker build -t nolim1t/mini-bitcoind ./bitcoind/Dockerfile.arm
+
 # Lightningd
 docker build -t nolim1t/lightningd ./lightningd
 ```
