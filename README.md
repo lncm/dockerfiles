@@ -122,11 +122,28 @@ docker run --rm \
 --name beyourownbank \
 -d=true \
 lncm/bitcoind:0.16.3-x86_64
+
+# Passing custom commands (for example reindexing the chain)
+docker run --rm \
+-v /local/path/to/data:/data \
+-p 8332:8332 \
+-p 8333:8333 \
+--name beyourownbank \
+-d=true \
+--entrypoint=/usr/local/bitcoin/bin/bitcoind \
+lncm/bitcoind:0.16.3-x86_64 \ 
+-datadir=/data/btc -reindex-chainstate \
+-zmqpubrawblock=tcp://0.0.0.0:28332 \
+-zmqpubrawblock=tcp://0.0.0.0:28332
 ```
 
 #### Windows
+
  ```
 docker run --rm -v drive:\data\:/data -p 8333:8333 -p 8332:8332 --name beyourownbank -d=true lncm/bitcoind:0.16.3-x86_64
+
+# Passing custom commands (for example reindexing the chain)
+docker run --rm -v drive:\data\:/data -p 8333:8333 -p 8332:8332 --name beyourownbank -d=true --entrypoint=/usr/local/bitcoin/bin/bitcoind lncm/bitcoind:0.16.3-x86_64 -datadir=/data/btc -reindex-chainstate --zmqpubrawblock=tcp://0.0.0.0:28332 -zmqpubrawblock=tcp://0.0.0.0:28332
 ```
 
 Basically the above maps a local folder to data. This stores the bitcoin.conf which should be in a folder called **/btc** inside the data folder. Will try to simplify this later.
