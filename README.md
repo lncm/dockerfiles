@@ -49,6 +49,9 @@ docker pull lncm/bitcoind:0.16.3-x86_64
 
 # If ARM 64 Architecture (raspberry pi)
 docker pull lncm/bitcoind:0.16.3-arm7
+
+# Lightning (arm7 architecture)
+docker pull lncm/clightning:0.6.1-arm7
 ```
 
 ## Starting
