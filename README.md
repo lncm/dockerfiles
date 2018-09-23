@@ -4,15 +4,15 @@
 
 ## What
 
-This docker file installs all the dependencies and bitcoind, then runs it.
+Let's you installs bitcoind and required dependencies, then run it.
 
-Idea behind this is to have a easy configurable bitcoind almost as an easy install.
+Idea behind this is to easily install bitcoind.
 
 Eventually, I'd want to incorporate [lightningd](https://github.com/ElementsProject/lightning) or [LND](https://github.com/lightningnetwork/lnd) too, maybe doing a compose file.
 
 ## Cleanup all images
 
-Make sure there is NOTHING running before you cleanup. 
+Make sure there is **nothing** running before you cleanup. 
 
 From the project root
 
@@ -20,7 +20,7 @@ From the project root
 ./clean.sh
 ```
 
-OR if you don't have this project
+**Or** if you don't have this project yet
 
 ```bash
 curl "https://gitlab.com/nolim1t/financial-independence/raw/master/clean.sh" 2>/dev/null | sh
@@ -28,14 +28,14 @@ curl "https://gitlab.com/nolim1t/financial-independence/raw/master/clean.sh" 2>/
 
 ## Building / BUIDL
 
-From the project root, e.g.:
+From the project root, e.g.
 ```bash
 cd dockerfiles
 ```
 
-This builds **bitcoind** and for **lncm/bitcoind** repo. Please tag your uploads according to `<version>-<arch>` where `version` is of the form `0.16.3` and `arch` may take `x64`, `arm6` or `arm7` depending to the CPU you are building on.
+This builds **bitcoind** for **lncm/bitcoind** repo. Please tag your uploads according to `<version>-<arch>` where `version` is of the form `0.16.3` and `arch` may take `x64`, `arm6` or `arm7` depending on the CPU you are building on.
 
-**Bitcoin Core (bitcoind) for Linux**
+**Bitcoin Core (bitcoind)**
 ```bash
 # x86_64 (64-bit)
 docker build -t lncm/bitcoind:unversioned-x64 ./bitcoind/x86_64
@@ -45,11 +45,31 @@ docker build -t lncm/bitcoind:unversioned-arm6 ./bitcoind/arm
 docker build -t lncm/bitcoind:unversioned-arm7 ./bitcoind/arm
 ```
 
-### Downloading
+**c-lightning (lightningd)**
+```bash
+# x86_64 (64-bit)
+docker build -t lncm/clightning:unversioned-x64 ./lightningd/x86_64
+# ARMv6 (32-bit Raspberry Pi: 1 / 1+ / 2 / Zero) 
+docker build -t lncm/clightning:unversioned-arm6 ./lightningd/arm
+# ARMv7 (64-bit Raspberry Pi: 2 v1.2 / 3 / 3+)
+docker build -t lncm/clightning:unversioned-arm7 ./lightningd/arm
+```
 
-Grab from docker hub if you don't have the image and don't want to spend hours compiling
+**Lightning Network Daemon (lnd)**
+```bash
+# x86_64 (64-bit)
+docker build -t lncm/lnd:unversioned-x64 ./lnd/x86_64
+# ARMv6 (32-bit Raspberry Pi: 1 / 1+ / 2 / Zero) 
+docker build -t lncm/lnd:unversioned-arm6 ./lnd/arm
+# ARMv7 (64-bit Raspberry Pi: 2 v1.2 / 3 / 3+)
+docker build -t lncm/lnd:unversioned-arm7 ./lnd/arm
+```
 
-**Bitcoin Core (bitcoind) for Linux**
+## Downloading
+
+Grab from Docker Hub if you don't have the image and don't want to spend hours compiling. Choose between x64, arm6 and arm7 according to your hardware.
+
+**Bitcoin Core (bitcoind)**
 ```bash
 # x86_64 (64-bit PC)
 docker pull lncm/bitcoind:0.16.3-x64
@@ -60,7 +80,8 @@ docker pull lncm/bitcoind:0.16.3-arm6
 # ARMv7 (64-bit Raspberry Pi: 2 v1.2 / 3 / 3+)
 docker pull lncm/bitcoind:0.16.3-arm7
 ```
-**c-lightning (lightningd) for Linux**
+
+**c-lightning (lightningd)**
 ```bash
 # x86_64 (64-bit PC)
 docker pull lncm/clightning:0.16.3-x64
@@ -72,10 +93,23 @@ docker pull lncm/clightning:0.6.1-arm6
 docker pull lncm/clightning:0.6.1-arm7
 ```
 
+**Lightning Network Daemon (lnd)**
+```bash
+# x86_64 (64-bit PC)
+docker pull lncm/lnd:0.5-x64
+
+# ARMv6 (32-bit Raspberry Pi: 1 / 1+ / 2 / Zero)
+docker pull lncm/lnd:0.5-arm6
+
+# ARMv7 (64-bit Raspberry Pi: 2 v1.2 / 3 / 3+)
+docker pull lncm/lnd:0.5-arm7
+```
+
 ## Starting
 
 ### Bitcoind
 
+#### Linux / MacOS
 ```bash
 # For x86 Architecture
 
@@ -88,12 +122,13 @@ docker run --rm \
 lncm/bitcoind:0.16.3-x86_64
 ```
 
-Basically the above maps a local folder to data. This stores the bitcoin.conf which should be in a folder called **/btc** inside the data folder. Will try to simplify this later.
-
 #### Windows
  ```
 docker run --rm -v drive:\data\:/data -p 8333:8333 -p 8332:8332 --name beyourownbank -d=true lncm/bitcoind:0.16.3-x86_64
 ```
+
+Basically the above maps a local folder to data. This stores the bitcoin.conf which should be in a folder called **/btc** inside the data folder. Will try to simplify this later.
+
 
 ## Interactive shell
 
@@ -112,7 +147,7 @@ This stops and cleans up the service.
 
 ## Debugging containers
 
-This is highly developmental so it may break. But it can be quite useful to include debug information into bug reports.
+This is highly experimental so it may break. But it can be quite useful to include debug information into bug reports.
 
 To peak into the container:
 
