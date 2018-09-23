@@ -35,25 +35,20 @@ From the project root. This builds whatever is in the folder **bitcoind** and ta
 docker build -t nolim1t/mini-bitcoind ./bitcoind/x86_64
 # Arm
 docker build -t nolim1t/mini-bitcoind ./bitcoind/arm
-
-# Lightningd
-docker build -t nolim1t/lightningd ./lightningd
 ```
 
 OR
 
 Grab from docker hub if you don't have the image and don't want to spend hours compiling
 
+Format from docker hub is **version-architecture**
+
 ```bash
 # if x86 Arch
-docker pull nolim1t/mini-bitcoind:x86_64_201809151809
-docker pull nolim1t/lightningd:x86_64-201809161814
+docker pull lncm/bitcoind:0.16.3-x86_64
 
 # If ARM 64 Architecture (raspberry pi)
-docker pull nolim1t/mini-bitcoind:arm_2018091801
-
-# LND ARM64
-docker pull nolim1t/lnd:latest-arm64
+docker pull lncm/bitcoind:0.16.3-arm7
 ```
 
 ## Starting
