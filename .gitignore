@@ -1,6 +1,9 @@
 build.sh
+build.cmd
 start.sh
 stop.sh
+start.cmd
+stop.cmd
 data/
 lnd.conf
 bitcoin.conf
