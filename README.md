@@ -28,29 +28,47 @@ curl "https://gitlab.com/nolim1t/financial-independence/raw/master/clean.sh" 2>/
 
 ## Building / BUIDL
 
-From the project root. This builds whatever is in the folder **bitcoind** and tags it as **nolim1t/mini-bitcoind** (you may change this tag by the way, however it doesn't matter unless you plan to push to docker hub. In all open source spirit, please share your code if you do. Thanks)
-
+From the project root, e.g.:
 ```bash
-# x86 bitcoind
-docker build -t nolim1t/mini-bitcoind ./bitcoind/x86_64
-# Arm
-docker build -t nolim1t/mini-bitcoind ./bitcoind/arm
+cd dockerfiles
 ```
 
-OR
+This builds **bitcoind** and for **lncm/bitcoind** repo. Please tag your uploads according to `<version>-<arch>` where `version` is of the form `0.16.3` and `arch` may take `x64`, `arm6` or `arm7` depending to the CPU you are building on.
+
+**Bitcoin Core (bitcoind) for Linux**
+```bash
+# x86_64 (64-bit)
+docker build -t lncm/bitcoind:unversioned-x64 ./bitcoind/x86_64
+# ARMv6 (32-bit Raspberry Pi: 1 / 1+ / 2 / Zero) 
+docker build -t lncm/bitcoind:unversioned-arm6 ./bitcoind/arm
+# ARMv7 (64-bit Raspberry Pi: 2 v1.2 / 3 / 3+)
+docker build -t lncm/bitcoind:unversioned-arm7 ./bitcoind/arm
+```
+
+### Downloading
 
 Grab from docker hub if you don't have the image and don't want to spend hours compiling
 
-Format from docker hub is **version-architecture**
-
+**Bitcoin Core (bitcoind) for Linux**
 ```bash
-# if x86 Arch
-docker pull lncm/bitcoind:0.16.3-x86_64
+# x86_64 (64-bit PC)
+docker pull lncm/bitcoind:0.16.3-x64
 
-# If ARM 64 Architecture (raspberry pi)
+# ARMv6 (32-bit Raspberry Pi: 1 / 1+ / 2 / Zero)
+docker pull lncm/bitcoind:0.16.3-arm6
+
+# ARMv7 (64-bit Raspberry Pi: 2 v1.2 / 3 / 3+)
 docker pull lncm/bitcoind:0.16.3-arm7
+```
+**c-lightning (lightningd) for Linux**
+```bash
+# x86_64 (64-bit PC)
+docker pull lncm/clightning:0.16.3-x64
 
-# Lightning (arm7 architecture)
+# ARMv6 (32-bit Raspberry Pi: 1 / 1+ / 2 / Zero)
+docker pull lncm/clightning:0.6.1-arm6
+
+# ARMv7 (64-bit Raspberry Pi: 2 v1.2 / 3 / 3+)
 docker pull lncm/clightning:0.6.1-arm7
 ```
 
@@ -70,13 +88,12 @@ docker run --rm \
 lncm/bitcoind:0.16.3-x86_64
 ```
 
-#### Windows
+Basically the above maps a local folder to data. This stores the bitcoin.conf which should be in a folder called **/btc** inside the data folder. Will try to simplify this later.
 
-```
+#### Windows
+ ```
 docker run --rm -v drive:\data\:/data -p 8333:8333 -p 8332:8332 --name beyourownbank -d=true lncm/bitcoind:0.16.3-x86_64
 ```
-
-Basically the above maps a local folder to data. This stores the bitcoin.conf which should be in a folder called **/btc** inside the data folder. Will try to simplify this later.
 
 ## Interactive shell
 
@@ -93,7 +110,7 @@ docker rm beyourownbank
 
 This stops and cleans up the service.
 
-## Debugging comtainers
+## Debugging containers
 
 This is highly developmental so it may break. But it can be quite useful to include debug information into bug reports.
 
