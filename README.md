@@ -63,7 +63,8 @@ docker run --rm \
 -p 8332:8332 \
 -p 8333:8333 \
 --name beyourownbank \
--d=true nolim1t/mini-bitcoind:x86_64_201809151809
+-d=true \
+lncm/bitcoind:0.16.3-x86_64
 ```
 
 Basically the above maps a local folder to data. This stores the bitcoin.conf which should be in a folder called **/btc** inside the data folder. Will try to simplify this later.
