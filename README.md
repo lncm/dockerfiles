@@ -70,6 +70,12 @@ docker run --rm \
 lncm/bitcoind:0.16.3-x86_64
 ```
 
+#### Windows
+
+```
+docker run --rm -v drive:\data\:/data -p 8333:8333 -p 8332:8332 --name beyourownbank -d=true lncm/bitcoind:0.16.3-x86_64
+```
+
 Basically the above maps a local folder to data. This stores the bitcoin.conf which should be in a folder called **/btc** inside the data folder. Will try to simplify this later.
 
 ## Interactive shell
