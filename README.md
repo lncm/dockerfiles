@@ -49,6 +49,8 @@ docker build -t lncm/bitcoind:unversioned-arm7 ./bitcoind/arm
 ```bash
 # x86_64 (64-bit)
 docker build -t lncm/clightning:unversioned-x64 ./lightningd/x86_64
+docker build -t lncm/clightning:0.6.1-x64 ./lightningd/x86_64
+
 # ARMv6 (32-bit Raspberry Pi: 1 / 1+ / 2 / Zero) 
 docker build -t lncm/clightning:unversioned-arm6 ./lightningd/arm
 # ARMv7 (64-bit Raspberry Pi: 2 v1.2 / 3 / 3+)
@@ -84,7 +86,7 @@ docker pull lncm/bitcoind:0.16.3-arm7
 **c-lightning (lightningd)**
 ```bash
 # x86_64 (64-bit PC)
-docker pull lncm/clightning:0.16.3-x64
+docker pull lncm/clightning:0.6.1-x64
 
 # ARMv6 (32-bit Raspberry Pi: 1 / 1+ / 2 / Zero)
 docker pull lncm/clightning:0.6.1-arm6
