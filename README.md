@@ -148,6 +148,33 @@ docker run --rm -v drive:\data\:/data -p 8333:8333 -p 8332:8332 --name beyourown
 
 Basically the above maps a local folder to data. This stores the bitcoin.conf which should be in a folder called **/btc** inside the data folder. Will try to simplify this later.
 
+### LightningD
+
+#### Raspberry PI
+
+Pre-requisites, butcoind is running.
+
+```bash
+mkdir -p /home/pi/data/lightningd
+cp ln.sh /home/pi/data
+cp config-dist /home/pi/data/lightningd/config
+# Or you can use vim (I dont judge)
+nano /home/pi/data/lightningd/config
+
+# Now we are ready to rock
+
+# You can run this
+docker run -it --rm \
+        --entrypoint="/data/ln.sh" \
+        -v /home/pi/data:/data \
+        -v /home/pi/data/lightningd:/root/.lightning \
+        -p 9735:9735 \
+        -d=true \
+        --name lightningpay \
+        lncm/clightning:0.6.1-arm7
+# OR this will also work too
+curl "https://gitlab.com/nolim1t/financial-independence/snippets/1757158/raw" 2>/dev/null | bash
+```
 
 ## Interactive shell
 
