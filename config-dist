@@ -1,0 +1,30 @@
+network=bitcoin
+alias=yourlightningnode
+rgb=14eb00
+mainnet
+rpc-file=/data/lightningd/lightning-rpc
+
+bitcoin-rpcconnect=host-ip-here
+bitcoin-rpcport=8332
+bitcoin-rpcuser=your-username-here
+bitcoin-rpcpassword=your-password-here
+bitcoin-datadir=/data/btc
+bitcoin-cli=/usr/local/bitcoin/bin/bitcoin-cli
+
+
+log-level=debug
+log-file=/data/lightningd/debug.log
+
+bind-addr=0.0.0.0:9735
+
+proxy=192.168.10.242:9050
+always-use-proxy=true
+
+# 1 sat base
+fee-base=1000
+# 0.1337% of the payment
+fee-per-satoshi=1337
+
+# Clean up 2 hours old invoices
+autocleaninvoice-cycle=7200
+autocleaninvoice-expired-by=7200
