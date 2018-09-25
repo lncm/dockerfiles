@@ -1,3 +1,4 @@
+block-cleanup.sh
 build.sh
 build.cmd
 start.sh
