@@ -1,4 +1,5 @@
 block-cleanup.sh
+check-ln-container.sh
 build.sh
 build.cmd
 start.sh
