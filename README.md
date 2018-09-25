@@ -160,9 +160,22 @@ docker exec -it beyourownbank bash
 ```bash
 docker stop beyourownbank
 docker rm beyourownbank
+
+docker stop lightningpay
+docker rm lightningpay
 ```
 
 This stops and cleans up the service.
+
+## Checking the existance of containers
+
+### On a Raspberry PI
+
+Execute this command. However, you should [read this script](https://gitlab.com/nolim1t/financial-independence/snippets/1757158) before proceeding.
+
+```bash
+curl "https://gitlab.com/nolim1t/financial-independence/snippets/1757158/raw" 2>/dev/null | bash
+```
 
 ## Debugging containers
 
