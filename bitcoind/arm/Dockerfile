@@ -1,4 +1,4 @@
-FROM library/ubuntu:16.04
+FROM library/ubuntu:18.04
 MAINTAINER nolim1t <hello@nolim1t.co>
 
 
@@ -30,7 +30,7 @@ RUN cd /source
 RUN git clone https://github.com/bitcoin/bitcoin.git
 RUN cd bitcoin
 WORKDIR /source/bitcoin
-RUN git checkout v0.16.3
+RUN git checkout v0.17.0
 RUN ./autogen.sh
 RUN mkdir -p /usr/local/bitcoin
 RUN ./configure CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib" --with-boost-libdir=/usr/lib/arm-linux-gnueabihf --without-gui --disable-wallet --prefix=/usr/local/bitcoin --disable-tests --disable-bench
