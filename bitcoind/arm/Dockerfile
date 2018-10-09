@@ -1,4 +1,4 @@
-FROM library/ubuntu:18.04
+FROM library/ubuntu:17.04
 MAINTAINER nolim1t <hello@nolim1t.co>
 
 
