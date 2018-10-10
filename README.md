@@ -75,6 +75,7 @@ Grab from Docker Hub if you don't have the image and don't want to spend hours c
 ```bash
 # x86_64 (64-bit PC)
 docker pull lncm/bitcoind:0.16.3-x64
+docker pull lncm/bitcoind:0.17.0-x64
 
 # ARMv6 (32-bit Raspberry Pi: 1 / 1+ / 2 / Zero)
 docker pull lncm/bitcoind:0.16.3-arm6
