@@ -1,4 +1,4 @@
-FROM lncm/bitcoind:0.16.3-arm7
+FROM lncm/bitcoind:0.17.0-arm7
 MAINTAINER nolim1t <hello@nolim1t.co>
 
 WORKDIR /source
