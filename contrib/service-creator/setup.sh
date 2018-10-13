@@ -23,6 +23,7 @@ ConditionPathExists=/home/pi/data/btc
 [Service]
 ExecStart=/usr/bin/docker run --rm -v /home/pi/data:/data -p 8332:8332 -p 8333:8333 -p 28333:28333 -p 28332:28332 --name beyourownbank -d=true lncm/bitcoind:0.17.0-arm7
 User=pi
+Type=forking
 PIDFile=/home/pi/data/btc/bitcoin.pid
 
 [Install]
