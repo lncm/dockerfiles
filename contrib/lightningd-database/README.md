@@ -2,7 +2,7 @@
 
 ## What block is this up to?
 
-This sqlite3 database is to bootstrap the install for c-lightning so its all up to data. 
+This sqlite3 database is to bootstrap the install for c-lightning up to block **#545533**
 
 This is highly experimental right now, so don not have any real money on your lightningd node when you start doing this.
 
@@ -15,7 +15,7 @@ gzip -d lightningd.sqlite3.gz
 cp lightningd.sqlite3 ~/.lightning
 ```
 
-## Preparing the database for distribution
+## Preparing the database for distribution (for future blocks)
 
 Basically we only want the blocks folder, all other stuff can be discarded.
 
