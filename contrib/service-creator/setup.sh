@@ -41,6 +41,7 @@ EOF
                     if [ -f /home/pi/data/lightningd/config ]; then
                         # Yay! We got a configured lighting
                         LNENTRYPOINT=/home/pi/data/ln.sh
+                        # Set up LN Entrypoint
                         if [ ! -f $LNENTRYPOINT ]; then
                             cat <<EOF >$LNENTRYPOINT
 #!/bin/bash
@@ -48,13 +49,15 @@ EOF
 /usr/local/bin/lightningd --lightning-dir=/data/lightningd
 EOF
                             chmod 755 $LNENTRYPOINT
-                            # Set up LN Entrypoint
-                            if ! docker images | grep 0.6.1-arm7; then
-                                echo "LN Image doesnt exist - Downloading"
-                                docker pull lncm/lncm/clightning:0.6.1-arm7
-                            fi
-                            # Create lightningd service
-                            cat <<EOF >  /etc/systemd/system/lightningd.service
+                        fi
+                        # Entrypoint created
+                        # set up service
+                        if ! docker images | grep 0.6.1-arm7; then
+                            echo "LN Image doesnt exist - Downloading"
+                            docker pull lncm/lncm/clightning:0.6.1-arm7
+                        fi
+                        # Create lightningd service
+                        cat <<EOF >  /etc/systemd/system/lightningd.service
 [Unit]
 Description=C lightning daemon
 After=network.target
@@ -69,13 +72,13 @@ ExecStop=/usr/bin/docker stop lightningpay
 
 [Install]
 WantedBy=multi-user.target
-                            
+                        
 EOF
-                            # lightningd service created
-                            systemctl enable lightningd
-                            # output
-                            echo "lightningd service installed - to enable run 'sudo systemctl start lightningd' or 'sudo systemctl status lightningd' for the status of the service. To stop, 'sudo systemctl stop lightningd'"
-                        fi
+                        # lightningd service created
+                        systemctl enable lightningd
+                        # output
+                        echo "lightningd service installed - to enable run 'sudo systemctl start lightningd' or 'sudo systemctl status lightningd' for the status of the service. To stop, 'sudo systemctl stop lightningd'"
+                        # Service set up
                     fi
                 fi
                 # Output
