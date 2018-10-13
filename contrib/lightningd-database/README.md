@@ -21,12 +21,10 @@ Basically we only want the blocks folder, all other stuff can be discarded.
 
 ```bash
 lightning-cli stop
-sqlite3 /path/to/lightningd.sqlite3
+cp /home/pi/data/lightningd/lightningd.sqlite3 /home/pi
 
-# In SQLITE
-delete from transactions;
-delete from utxoset_spend;
-delete from utxoset;
-delete from channel_htlcs;
-delete from channels;
+# In Cleaning up the database
+sqlite3 /home/pi/lightningd.sqlite3 "delete from channels; delete from transactions; delete from invoices; delete from utxoset; delete from channel_htlcs; delete from payments; delete from outputs; "
+# Set the amount of addreesses to be generated
+sqlite3 /home/pi/lightningd.sqlite3 "update vars set val = 1 where name = 'bip32_max_index'; "
 ```
