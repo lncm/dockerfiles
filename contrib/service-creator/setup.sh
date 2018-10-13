@@ -38,7 +38,7 @@ EOF
                 # bitcoind installed
                 # Check for lightningd (lets try to set it up)
                 if [ -d /home/pi/data/lightningd ]; then
-                    if [ -f /home/pi/data/lightningd/conf ]; then
+                    if [ -f /home/pi/data/lightningd/config ]; then
                         # Yay! We got a configured lighting
                         LNENTRYPOINT=/home/pi/data/ln.sh
                         if [ ! -f $LNENTRYPOINT ]; then
