@@ -26,7 +26,6 @@ User=pi
 Type=forking
 RemainAfterExit=true
 ExecStop=/usr/bin/docker stop beyourownbank
-PIDFile=/home/pi/data/btc/bitcoin.pid
 
 [Install]
 WantedBy=multi-user.target
