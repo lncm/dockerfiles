@@ -24,9 +24,7 @@ elif [ $(uname -m) == "x86_64" ]; then
       docker pull lncm/bitcoind:0.17.0-x64
   fi
 else
-  # Weird ass system so lets download the binary and verify it instead (source: https://gitlab.com/nolim1t/financial-independence/snippets/1762404)
-  echo "Downloading the binary as its not an ARM system"
-  curl "https://gitlab.com/nolim1t/financial-independence/snippets/1762404/raw" 2>/dev/null | bash
+  echo "Docker images aren't supported for this system (probably a PI Zero?)"
 fi
 
 if [ -f /usr/bin/docker ]; then
