@@ -30,7 +30,7 @@ ExecStart=/usr/bin/docker run --rm -v /home/pi/data:/data -p 8332:8332 -p 8333:8
 User=pi
 Type=forking
 RemainAfterExit=true
-ExecStop=/usr/bin/docker stop beyourownbank
+ExecStop=/usr/bin/docker exec -it beyourownbank /usr/local/bitcoin/bin/bitcoin-cli --datadir=/data/btc stop
 
 [Install]
 WantedBy=multi-user.target
