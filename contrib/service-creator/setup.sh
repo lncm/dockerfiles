@@ -57,7 +57,7 @@ EOF
                         # set up service
                         if ! docker images | grep 0.6.1-arm7; then
                             echo "LN Image doesnt exist - Downloading"
-                            docker pull lncm/lncm/clightning:0.6.1-arm7
+                            docker pull lncm/clightning:0.6.1-arm7
                         fi
                         # Create lightningd service
                         cat <<EOF >  /etc/systemd/system/lightningd.service
