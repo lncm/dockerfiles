@@ -3,7 +3,12 @@
 
 IPADDRESS=`ip route get 1 | awk '{print $NF;exit}'`
 PROXY="$(echo $IPADDRESS):9050"
+
+# TODO: Make it default to hostname
 NODEALIAS='default #reckless'
+# TODO: Incorporate https://gitlab.com/nolim1t/financial-independence/snippets/1763760 
+# into the script somehow
+
 BTCUSERNAME='username'
 BTCPASSWORD='password'
 if [ -d /home/pi/data ]; then
