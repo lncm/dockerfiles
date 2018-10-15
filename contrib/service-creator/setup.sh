@@ -21,6 +21,9 @@ if [ -f /usr/bin/docker ]; then
 Description=Bitcoin daemon
 After=network.target
 ConditionPathExists=/home/pi/data/btc
+ConditionPathExists=/home/pi/data/btc/bitcoin.conf
+ConditionPathExists=/home/pi/data/btc/chainstate
+ConditionPathExists=/home/pi/data/btc/blocks
 
 [Service]
 ExecStart=/usr/bin/docker run --rm -v /home/pi/data:/data -p 8332:8332 -p 8333:8333 -p 28333:28333 -p 28332:28332 --name beyourownbank -d=true lncm/bitcoind:0.17.0-arm7
@@ -62,6 +65,7 @@ EOF
 Description=C lightning daemon
 After=network.target
 ConditionPathExists=/home/pi/data/lightningd
+ConditionPathExists=/home/pi/data/lightningd/config
 
 [Service]
 ExecStart=/usr/bin/docker run -it --rm --entrypoint="/data/ln.sh" -v /home/pi/data:/data -v /home/pi/data/lightningd:/root/.lightning -p 9735:9735 -d=true --name lightningpay lncm/clightning:0.6.1-arm7
