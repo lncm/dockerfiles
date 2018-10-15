@@ -25,6 +25,7 @@ elif [ $(uname -m) == "x86_64" ]; then
   fi
 else
   echo "Docker images aren't supported for this system (probably a PI Zero?)"
+  # TODO: Maybe a placeholder to install https://github.com/gdassori/spruned/ instead
 fi
 
 if [ -f /usr/bin/docker ]; then
