@@ -27,7 +27,7 @@ else
   echo "Docker images aren't supported for this system (probably a PI Zero?)"
   # TODO: Install https://github.com/gdassori/spruned/
   # Install dependencies
-  sudo apt-get install libleveldb-dev python3-dev git virtualenv gcc g++
+  sudo apt-get install -y libleveldb-dev python3-dev git virtualenv gcc g++
   # Set up build directory
   mkdir -p /home/pi/source
   cd /home/pi/source
