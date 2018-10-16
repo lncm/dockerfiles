@@ -36,6 +36,7 @@ else
   cd spruned
   ./setup.sh
   #venv/bin/spruned --rpcuser="lightning" --rpcpassword="yourpassword" --rpcport=8332 --datadir=/home/pi/data/spruned
+  chown -R pi.pi /home/pi/src
 fi
 
 if [ -f /usr/bin/docker ]; then
@@ -109,6 +110,17 @@ EOF
                           fi
                         else
                           echo "TODO: download and build c-lightning"
+                          #mkdir -p /home/pi/src
+                          #sudo apt-get install -y \
+                          #autoconf automake build-essential git libtool libgmp-dev \
+                          #libsqlite3-dev python python3 net-tools zlib1g-dev
+                          #cd /home/pi/src
+                          #git clone https://github.com/ElementsProject/lightning.git
+                          #cd lightning
+                          #./configure
+                          #make
+                          #chown -R pi.pi /home/pi/src/lightning
+
                         fi
                         # Create lightningd service IF its a docker based system
                         if [ $(uname -m) == "armv7l" ] || [ $(uname -m) == "x86_64" ]; then
