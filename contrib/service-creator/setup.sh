@@ -38,7 +38,7 @@ else
   pip install -r requirements.txt
   python setup.py install
   chown -R pi.pi /home/pi/source
-
+  # Installed to ~/source/spruned/venv/bin/spruned
 fi
 
 if [ -f /usr/bin/docker ]; then
