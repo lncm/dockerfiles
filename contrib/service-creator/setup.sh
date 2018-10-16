@@ -25,7 +25,20 @@ elif [ $(uname -m) == "x86_64" ]; then
   fi
 else
   echo "Docker images aren't supported for this system (probably a PI Zero?)"
-  # TODO: Maybe a placeholder to install https://github.com/gdassori/spruned/ instead
+  # TODO: Install https://github.com/gdassori/spruned/
+  # Install dependencies
+  sudo apt-get install libleveldb-dev python3-dev git virtualenv gcc g++
+  # Set up build directory
+  mkdir -p /home/pi/source
+  cd /home/pi/source
+  git clone https://github.com/gdassori/spruned.git
+  cd spruned
+  virtualenv -p python3.6 venv
+  . venv/bin/activate
+  pip install -r requirements.txt
+  python setup.py install
+  chown -R pi.pi /home/pi/source
+
 fi
 
 if [ -f /usr/bin/docker ]; then
