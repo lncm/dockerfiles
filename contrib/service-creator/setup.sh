@@ -11,6 +11,8 @@ if command -v pwgen 2>&1 1>/dev/null; [ "$?" -ne "0" ]; then
   exit 1
 fi
 
+export GENERATEDUID=`pwgen -s 12 1` # This can be used in for for subsequent scripts
+export GENERATEDPW=`pwgen -s 16 1` # This can be used in for for subsequent scripts
 
 if [ $(uname -m) == "armv7l" ]; then
   # This is ARM 64 specific
@@ -26,6 +28,14 @@ elif [ $(uname -m) == "x86_64" ]; then
 else
   echo "Docker images aren't supported for this system (probably a PI Zero?)"
   # TODO: Install https://github.com/gdassori/spruned/ or bootstrap c-lightning
+  # Setup spruned
+  sudo apt-get install -y libleveldb-dev python3-dev git virtualenv gcc g++
+  mkdir -p /home/pi/src
+  cd /home/pi/src
+  git clone https://github.com/gdassori/spruned.git
+  cd spruned
+  ./setup.sh
+  #venv/bin/spruned --rpcuser="lightning" --rpcpassword="yourpassword" --rpcport=8332 --datadir=/home/pi/data/spruned
 fi
 
 if [ -f /usr/bin/docker ]; then
