@@ -29,14 +29,14 @@ else
   echo "Docker images aren't supported for this system (probably a PI Zero?)"
   # TODO: Install https://github.com/gdassori/spruned/ or bootstrap c-lightning
   # Setup spruned
-  sudo apt-get install -y libleveldb-dev python3-dev git virtualenv gcc g++
-  mkdir -p /home/pi/src
-  cd /home/pi/src
-  git clone https://github.com/gdassori/spruned.git
-  cd spruned
-  ./setup.sh
+  #sudo apt-get install -y libleveldb-dev python3-dev git virtualenv gcc g++
+  #mkdir -p /home/pi/src
+  #cd /home/pi/src
+  #git clone https://github.com/gdassori/spruned.git
+  #cd spruned
+  #./setup.sh
   #venv/bin/spruned --rpcuser="lightning" --rpcpassword="yourpassword" --rpcport=8332 --datadir=/home/pi/data/spruned
-  chown -R pi.pi /home/pi/src
+  #chown -R pi.pi /home/pi/src
 fi
 
 if [ -f /usr/bin/docker ]; then
