@@ -2,7 +2,7 @@
 
 ## What block is this up to?
 
-This sqlite3 database is to bootstrap the install for c-lightning up to block **#545731**
+This sqlite3 database is to bootstrap the install for c-lightning up to block **#546651**
 
 This is highly experimental right now, so don not have any real money on your lightningd node when you start doing this.
 
@@ -27,4 +27,9 @@ cp /home/pi/data/lightningd/lightningd.sqlite3 /home/pi
 sqlite3 /home/pi/lightningd.sqlite3 "delete from channels; delete from transactions; delete from invoices; delete from utxoset; delete from channel_htlcs; delete from payments; delete from outputs; "
 # Set the amount of addreesses to be generated
 sqlite3 /home/pi/lightningd.sqlite3 "update vars set val = 1 where name = 'bip32_max_index'; "
+
+# One Liner (executed from /home/pi)
+
+docker exec -it lightningpay lightning-cli stop ; sleep 10 ; cp data/lightningd/lightningd.sqlite3 . ; sqlite3 /home/pi/lightningd.sqlite3 "delete from channels; delete from transactions; delete from invoices; delete from utxoset; delete from channel_htlcs; delete from payments; delete from outputs; update vars set val = 1 where name = 'bip32_max_index'; " ; sleep 10 ; source/financial-independence/start-ln.sh
+
 ```
