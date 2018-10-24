@@ -5,7 +5,8 @@ This is a looping bash script which checks that the node is online
 ## Invocation
 
 ```bash
-./check.sh &
+wget -O /usr/local/bin/check.sh "https://gitlab.com/nolim1t/financial-independence/raw/master/contrib/service-check/check.sh"
+./usr/local/bin/check.sh &
 ```
 
 or
@@ -18,11 +19,14 @@ curl "https://gitlab.com/nolim1t/financial-independence/raw/master/contrib/servi
 ## Put it into a system service
 
 ```bash
+wget -O /usr/local/bin/check.sh "https://gitlab.com/nolim1t/financial-independence/raw/master/contrib/service-check/check.sh"
+chmod 755 /usr/local/bin/check.sh
 cat <<EOF >  /etc/systemd/system/paymentprocessor.service
 
 [Unit]
 Description=Payment Processor Service
 After=network.target
+ConditionPathExists=/usr/local/bin/check.sh
 ConditionPathExists=/home/pi/data/btc
 ConditionPathExists=/home/pi/data/btc/bitcoin.conf
 ConditionPathExists=/home/pi/data/btc/chainstate
@@ -33,7 +37,7 @@ ConditionPathExists=/usr/bin/docker
 ConditionPathExists=/usr/bin/curl
 
 [Service]
-ExecStart=/usr/bin/curl "https://gitlab.com/nolim1t/financial-independence/raw/master/contrib/service-check/check.sh" 2>/dev/null | bash &
+ExecStart=/usr/local/bin/check.sh &
 User=pi
 Type=oneshot
 RemainAfterExit=true
