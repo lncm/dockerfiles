@@ -1,3 +1,5 @@
+#!/bin/bash
+
 exec > /home/pi/service-check.log 2>&1
 set -x
 
