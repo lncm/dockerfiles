@@ -41,5 +41,5 @@ RemainAfterExit=true
 [Install]
 WantedBy=multi-user.target
 EOF
-
+systemctl enable paymentprocessor
 ```
