@@ -18,6 +18,14 @@ curl "https://gitlab.com/nolim1t/financial-independence/raw/master/contrib/servi
 
 ## Put it into a system service
 
+### Run as root
+
+```bash
+curl "https://gitlab.com/nolim1t/financial-independence/raw/master/contrib/service-check/install.sh" 2>/dev/null | sudo bash
+```
+
+### Commands
+
 ```bash
 cat <<EOF > /usr/local/bin/checkd.sh
 #!/bin/bash
