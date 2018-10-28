@@ -3,7 +3,18 @@
 exec > /home/pi/service-check.log 2>&1
 set -x
 
+# Check IP Addresses and update if broken
 IP=`ip route get 1 | awk '{print $NF;exit}'`
+if [ ! -f /home/pi/ipaddress.txt ]; then
+    echo $IP > /home/pi/ipaddress.txt
+else
+    OLDIP=$(cat /home/pi/ipaddress.txt)
+    if [ ! $OLDIP == $IP ]; then
+        echo "IP Address is different"
+        # IP Address is different, Update the 
+        sed "s/$OLDIP/$IP/g; " /home/pi/data/lightningd/config > /home/pi/data/lightningd/config
+    fi
+fi
 
 while [ 1 ]
 do
