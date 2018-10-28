@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ "$(id -u)" -ne "0" ]; then
+    echo "Please run this utility with sudo or root"
+    exit 1
+fi
+
+
 cat <<EOF > /usr/local/bin/checkd.sh
 #!/bin/bash
 /usr/local/bin/check.sh & 2>/dev/null 1>/dev/null
