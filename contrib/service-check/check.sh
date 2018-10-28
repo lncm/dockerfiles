@@ -6,13 +6,15 @@ set -x
 # Check IP Addresses and update if broken
 IP=`ip route get 1 | awk '{print $NF;exit}'`
 if [ ! -f /home/pi/ipaddress.txt ]; then
-    echo $IP > /home/pi/ipaddress.txt
+    echo $IP > /home/pi/.ipaddress.txt
 else
-    OLDIP=$(cat /home/pi/ipaddress.txt)
+    OLDIP=$(cat /home/pi/.ipaddress.txt)
     if [ ! $OLDIP == $IP ]; then
         echo "IP Address is different"
-        # IP Address is different, Update the 
+        # IP Address is different, Update the configs
         sed "s/$OLDIP/$IP/g; " /home/pi/data/lightningd/config > /home/pi/data/lightningd/config
+        # Update the IP Addresses
+        echo $IP > /home/pi/.ipaddress.txt
     fi
 fi
 
