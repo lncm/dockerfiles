@@ -15,13 +15,28 @@ or
 curl "https://gitlab.com/nolim1t/financial-independence/raw/master/contrib/service-check/check.sh" 2>/dev/null | bash &
 ```
 
+OR
+
+```bash
+curl "https://raw.githubusercontent.com/lncm/dockerfiles/master/contrib/service-check/check.sh" 2>/dev/null | bash &
+```
+
 
 ## Put it into a system service
+
+This will install the system checker into the crontab.
+
+The service will also re-configure lightningd if the IP address of the box has changed upon startup.
 
 ### Run as root
 
 ```bash
 curl "https://gitlab.com/nolim1t/financial-independence/raw/master/contrib/service-check/install.sh" 2>/dev/null | sudo bash
+```
+OR
+
+```bash
+curl "https://raw.githubusercontent.com/lncm/dockerfiles/master/contrib/service-check/install.sh" 2>/dev/null | sudo bash
 ```
 
 ### Commands
