@@ -1,7 +1,7 @@
 - [ X ] bitcoind: Make pre-built image for ARM architecture (64 - raspberry pi)
 - [ ] bitcoind: Make pre-built image for ARM architecture (32 - raspberry zero)
-- [ ] lightningd: Make a lightningd image (x86 arch)
-- [ ] lightningd: Make a lightningd image (arm 64 arch)
+- [ X ] lightningd: Make a lightningd image (x86 arch)
+- [ X ] lightningd: Make a lightningd image (arm 64 arch)
 - [ ] lightningd: Make a lightningd image (arm 32 arch)
 - [ ] lnd: Make a LND instance
 - [ ] Make docker compose file with dependencies
