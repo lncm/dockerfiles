@@ -5,7 +5,9 @@ set -x
 
 # Check IP Addresses and update if broken
 IP=`ip route get 1 | awk '{print $NF;exit}'`
-if [ ! -f /home/pi/ipaddress.txt ]; then
+echo "Update IP Address script"
+if [ ! -f /home/pi/.ipaddress.txt ]; then
+    echo "IP Address doesnt exist in file"
     echo $IP > /home/pi/.ipaddress.txt
 else
     OLDIP=$(cat /home/pi/.ipaddress.txt)
