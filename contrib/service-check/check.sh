@@ -12,7 +12,9 @@ else
     if [ ! $OLDIP == $IP ]; then
         echo "IP Address is different"
         # IP Address is different, Update the configs
-        sed "s/$OLDIP/$IP/g; " /home/pi/data/lightningd/config > /home/pi/data/lightningd/config
+        cp /home/pi/data/lightningd/config /home/pi/data/lightningd/config.old
+        sed "s/$OLDIP/$IP/g; " /home/pi/data/lightningd/config > /home/pi/data/lightningd/config.new
+        cp /home/pi/data/lightningd/config.new /home/pi/data/lightningd/config
         # Update the IP Addresses
         echo $IP > /home/pi/.ipaddress.txt
     fi
