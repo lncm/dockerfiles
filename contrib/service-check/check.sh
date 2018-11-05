@@ -55,6 +55,6 @@ do
 			--name lightningpay \
 		lncm/clightning:0.6.1-arm7
 	fi
-	# Check every 20 seconds
-	sleep 20
+	# Check every 60 seconds
+	sleep 60
 done
