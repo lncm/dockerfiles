@@ -25,20 +25,22 @@ fi
 while [ 1 ]
 do
 
-	# Check for bitcoind
-	if $(nc -z -v -w5 $IP 8332); then
-		echo "Bitcoind is alive"
-	else
-		echo "Starting up bitcoind"
-		docker run --rm \
-			-v /home/pi/data:/data \
-			-p 8332:8332 \
-			-p 8333:8333 \
-			-p 28332:28332 \
-			-p 28333:28333 \
-			--name beyourownbank \
-			-d=true \
-		lncm/bitcoind:0.17.0-arm7
+	# Check for bitcoind - if directory exists
+	if [ -d /home/pi/data/btc ]; then
+		if $(nc -z -v -w5 $IP 8332); then
+			echo "Bitcoind is alive"
+		else
+			echo "Starting up bitcoind"
+			docker run --rm \
+				-v /home/pi/data:/data \
+				-p 8332:8332 \
+				-p 8333:8333 \
+				-p 28332:28332 \
+				-p 28333:28333 \
+				--name beyourownbank \
+				-d=true \
+			lncm/bitcoind:0.17.0-arm7
+		fi	
 	fi
 
 	# Check for lightningd - If directory Exists
