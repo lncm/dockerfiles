@@ -41,19 +41,24 @@ do
 		lncm/bitcoind:0.17.0-arm7
 	fi
 
-	# Check for lightningd
-	if $(nc -z -v -w5 $IP 9735); then
-		echo "Lightning service is online"
-	else
-		echo "Starting up lightning service because offline"
-		docker run -it --rm \
-			--entrypoint="/data/ln.sh" \
-			-v /home/pi/data:/data \
-			-v /home/pi/data/lightningd:/root/.lightning \
-			-p 9735:9735 \
-			-d=true \
-			--name lightningpay \
-		lncm/clightning:0.6.1-arm7
+	# Check for lightningd - If directory Exists
+	if [ -d /home/pi/data/lightningd ]; then
+		# Also check if the entrypoint file exists
+		if [ -f /home/pi/data/ln.sh ]; then
+			if $(nc -z -v -w5 $IP 9735); then
+				echo "Lightning service is online"
+			else
+				echo "Starting up lightning service because offline"
+				docker run -it --rm \
+					--entrypoint="/data/ln.sh" \
+					-v /home/pi/data:/data \
+					-v /home/pi/data/lightningd:/root/.lightning \
+					-p 9735:9735 \
+					-d=true \
+					--name lightningpay \
+				lncm/clightning:0.6.1-arm7
+			fi		
+		fi	
 	fi
 	# Check every 60 seconds
 	sleep 60
