@@ -91,11 +91,35 @@ do
 		else
 			echo "No bitcoind exists"
 		fi
+
+		# Check for lightningd
+		if command -v lightningd 2>&1 1>/dev/null; [ "$?" -eq "0" ]; then
+			if [ -d $HOME/.lightning ]; then
+				echo "We have a lightning directory"
+				if [ -f $HOME/.lightning/config ]; then
+					if $(nc -z -v -w5 $IP 9735); then
+						echo "Something is running on 9735 - not running lightning"
+					else
+						lightningd -daemon
+					fi
+				else
+					echo "Lightningd not configured - skipping"
+				fi
+			else
+				echo "Lightningd not configured (no directory called .lightning) - skipping"
+			fi
+		fi
+
 		# Check LND
 		if [ ! -z "$GOPATH" ]; then
 			if [ -f $GOPATH/bin/lnd ]; then
 				if [ -f $HOME/.lnd/lnd.conf ]; then
-					echo "LND exists and is configured"				
+					if command -v lnd 2>&1 1>/dev/null; [ "$?" -eq "0" ]; then
+						echo "LND exists and is configured"
+						# TODO: run lnd without unlocking or create wallet bullshit when I figure that out
+					fi
+				else
+					echo "LND not configured skipping"		
 				fi
 			fi
 		else
