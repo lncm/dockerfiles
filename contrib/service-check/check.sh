@@ -1,7 +1,9 @@
 #!/bin/bash
 
-exec > /home/pi/service-check.log 2>&1
-set -x
+if [ -d /home/pi ]; then
+	exec > /home/pi/service-check.log 2>&1
+	set -x	
+fi
 
 # Check IP Addresses and update if broken
 IP=`ip route get 1 | awk '{print $NF;exit}'`
@@ -25,42 +27,50 @@ fi
 while [ 1 ]
 do
 
-	# Check for bitcoind - if directory exists
-	if [ -d /home/pi/data/btc ]; then
-		if $(nc -z -v -w5 $IP 8332); then
-			echo "Bitcoind is alive"
-		else
-			echo "Starting up bitcoind"
-			docker run --rm \
-				-v /home/pi/data:/data \
-				-p 8332:8332 \
-				-p 8333:8333 \
-				-p 28332:28332 \
-				-p 28333:28333 \
-				--name beyourownbank \
-				-d=true \
-			lncm/bitcoind:0.17.0-arm7
-		fi	
-	fi
-
-	# Check for lightningd - If directory Exists
-	if [ -d /home/pi/data/lightningd ]; then
-		# Also check if the entrypoint file exists
-		if [ -f /home/pi/data/ln.sh ]; then
-			if $(nc -z -v -w5 $IP 9735); then
-				echo "Lightning service is online"
+	# Check for docker
+	echo "Checking existance of docker"
+	if  [ -f /usr/bin/docker ]; then
+		# OK Docker exists
+		# Check for bitcoind - if data directory exists
+		if [ -d /home/pi/data/btc ]; then
+			if $(nc -z -v -w5 $IP 8332); then
+				echo "Bitcoind is alive"
 			else
-				echo "Starting up lightning service because offline"
-				docker run -it --rm \
-					--entrypoint="/data/ln.sh" \
+				echo "Starting up bitcoind"
+				docker run --rm \
 					-v /home/pi/data:/data \
-					-v /home/pi/data/lightningd:/root/.lightning \
-					-p 9735:9735 \
+					-p 8332:8332 \
+					-p 8333:8333 \
+					-p 28332:28332 \
+					-p 28333:28333 \
+					--name beyourownbank \
 					-d=true \
-					--name lightningpay \
-				lncm/clightning:0.6.1-arm7
-			fi		
+				lncm/bitcoind:0.17.0-arm7
+			fi	
+		fi
+
+		# Check for lightningd - If directory Exists
+		if [ -d /home/pi/data/lightningd ]; then
+			# Also check if the entrypoint file exists
+			if [ -f /home/pi/data/ln.sh ]; then
+				if $(nc -z -v -w5 $IP 9735); then
+					echo "Lightning service is online"
+				else
+					echo "Starting up lightning service because offline"
+					docker run -it --rm \
+						--entrypoint="/data/ln.sh" \
+						-v /home/pi/data:/data \
+						-v /home/pi/data/lightningd:/root/.lightning \
+						-p 9735:9735 \
+						-d=true \
+						--name lightningpay \
+					lncm/clightning:0.6.1-arm7
+				fi		
+			fi	
 		fi	
+	else
+		echo "Docker does not exist"
+		# TODO: try to launch other ways
 	fi
 	# Check every 60 seconds
 	sleep 60
