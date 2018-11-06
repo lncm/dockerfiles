@@ -3,9 +3,12 @@
 if [ -d /home/pi ]; then
 	exec > /home/pi/service-check.log 2>&1
 	set -x	
+else
+	exec > $HOME/service-check.log 2>&1
+	set -x
 fi
 
-# Check IP Addresses and update if broken
+# Check IP Addresses and update if broken (PI specific)
 IP=`ip route get 1 | awk '{print $NF;exit}'`
 echo "Update IP Address script"
 if [ ! -f /home/pi/.ipaddress.txt ]; then
@@ -32,13 +35,13 @@ do
 	if  [ -f /usr/bin/docker ]; then
 		# OK Docker exists
 		# Check for bitcoind - if data directory exists
-		if [ -d /home/pi/data/btc ]; then
+		if [ -d $HOME/data/btc ]; then
 			if $(nc -z -v -w5 $IP 8332); then
 				echo "Bitcoind is alive"
 			else
 				echo "Starting up bitcoind"
 				docker run --rm \
-					-v /home/pi/data:/data \
+					-v $HOME/data:/data \
 					-p 8332:8332 \
 					-p 8333:8333 \
 					-p 28332:28332 \
@@ -50,9 +53,9 @@ do
 		fi
 
 		# Check for lightningd - If directory Exists
-		if [ -d /home/pi/data/lightningd ]; then
+		if [ -d $HOME/data/lightningd ]; then
 			# Also check if the entrypoint file exists
-			if [ -f /home/pi/data/ln.sh ]; then
+			if [ -f $HOME/data/ln.sh ]; then
 				if $(nc -z -v -w5 $IP 9735); then
 					echo "Lightning service is online"
 				else
@@ -74,14 +77,24 @@ do
 		# Check if bitcoind exists
 		if command -v bitcoind 2>&1 1>/dev/null; [ "$?" -eq "0" ]; then
 			echo "Bitcoind exists on the machine, lets try to start it"
-			if [ -d /home/pi/.bitcoin ]; then
-				if [ -f /home/pi/.bitcoin/bitcoin.conf ]; then
+			if [ -d $HOME/.bitcoin ]; then
+				if [ -f $HOME/.bitcoin/bitcoin.conf ]; then
 					# Start bitcoind
 					bitcoind -daemon				
 				fi
 			fi
 		else
 			echo "No bitcoind exists"
+		fi
+		# Check LND
+		if [ ! -z "$GOPATH" ]; then
+			if [ -f $GOPATH/bin/lnd ]; then
+				if [ -f $HOME/.lnd/lnd.conf ]; then
+					echo "LND exists and is configured"				
+				fi
+			fi
+		else
+			echo "GOPATH not set so there is no LND isntalled"
 		fi
 	fi
 	# Check every 60 seconds
