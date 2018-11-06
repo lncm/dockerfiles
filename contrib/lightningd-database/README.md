@@ -2,7 +2,7 @@
 
 ## What block is this up to?
 
-This sqlite3 database is to bootstrap the install for c-lightning up to block **#546651**
+This sqlite3 database is to bootstrap the install for c-lightning up to block **#543987**
 
 This is highly experimental right now, so don not have any real money on your lightningd node when you start doing this.
 
