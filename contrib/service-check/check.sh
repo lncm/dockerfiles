@@ -79,8 +79,13 @@ do
 			echo "Bitcoind exists on the machine, lets try to start it"
 			if [ -d $HOME/.bitcoin ]; then
 				if [ -f $HOME/.bitcoin/bitcoin.conf ]; then
-					# Start bitcoind
-					bitcoind -daemon				
+					if $(nc -z -v -w5 $IP 8333); then
+						echo "Bitcoind is running"
+					else
+						echo "Bitcoind is dead, start it up"
+						# Start bitcoind
+						bitcoind -daemon					
+					fi				
 				fi
 			fi
 		else
