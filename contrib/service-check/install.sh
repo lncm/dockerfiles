@@ -8,14 +8,12 @@ fi
 
 cat <<EOF > /usr/local/bin/checkd.sh
 #!/bin/bash
-/usr/local/bin/check.sh & 2>/dev/null 1>/dev/null
+curl "https://gitlab.com/nolim1t/financial-independence/raw/master/contrib/service-check/check.sh" 2>/dev/null | bash & 2>/dev/null 1>/dev/null
 EOF
 
 chmod 755 /usr/local/bin/checkd.sh
 
-wget -O /usr/local/bin/check.sh "https://gitlab.com/nolim1t/financial-independence/raw/master/contrib/service-check/check.sh"
 
-chmod 755 /usr/local/bin/check.sh
 cat <<EOF >  /etc/systemd/system/paymentprocessor.service
 [Unit]
 Description=Payment Processor Service
