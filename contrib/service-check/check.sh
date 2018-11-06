@@ -62,8 +62,8 @@ do
 					echo "Starting up lightning service because offline"
 					docker run -it --rm \
 						--entrypoint="/data/ln.sh" \
-						-v /home/pi/data:/data \
-						-v /home/pi/data/lightningd:/root/.lightning \
+						-v $HOME/data:/data \
+						-v $HOME/data/lightningd:/root/.lightning \
 						-p 9735:9735 \
 						-d=true \
 						--name lightningpay \
