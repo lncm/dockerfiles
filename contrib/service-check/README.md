@@ -65,7 +65,6 @@ ConditionPathExists=/home/pi/data/btc/chainstate
 ConditionPathExists=/home/pi/data/btc/blocks
 ConditionPathExists=/home/pi/data/lightningd
 ConditionPathExists=/home/pi/data/lightningd/config
-ConditionPathExists=/usr/bin/docker
 ConditionPathExists=/usr/bin/curl
 
 [Service]
