@@ -8,7 +8,7 @@ fi
 GENERATEDUID=`pwgen -s 12 1` # This can be used in for for subsequent scripts
 GENERATEDPW=`pwgen -s 16 1` # This can be used in for for subsequent scripts
 
-echp "Generating RPC Auth from bitcoin repo"
+echo "Generating RPC Auth from bitcoin repo"
 curl "https://raw.githubusercontent.com/bitcoin/bitcoin/master/share/rpcauth/rpcauth.py" 2>/dev/null 1>rpcauth.py
 if [ -f ./rpcauth.py ]; then
 	chmod 700 rpcauth.py
