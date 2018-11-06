@@ -70,7 +70,19 @@ do
 		fi	
 	else
 		echo "Docker does not exist"
-		# TODO: try to launch other ways
+		# try to launch other ways
+		# Check if bitcoind exists
+		if command -v bitcoind 2>&1 1>/dev/null; [ "$?" -eq "0" ]; then
+			echo "Bitcoind exists on the machine, lets try to start it"
+			if [ -d /home/pi/.bitcoin ]; then
+				if [ -f /home/pi/.bitcoin/bitcoin.conf ]; then
+					# Start bitcoind
+					bitcoind -daemon				
+				fi
+			fi
+		else
+			echo "No bitcoind exists"
+		fi
 	fi
 	# Check every 60 seconds
 	sleep 60
