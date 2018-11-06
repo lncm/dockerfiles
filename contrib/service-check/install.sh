@@ -19,13 +19,6 @@ cat <<EOF >  /etc/systemd/system/paymentprocessor.service
 Description=Payment Processor Service
 After=network.target
 ConditionPathExists=/usr/local/bin/checkd.sh
-ConditionPathExists=/usr/local/bin/check.sh
-ConditionPathExists=/home/pi/data/btc
-ConditionPathExists=/home/pi/data/btc/bitcoin.conf
-ConditionPathExists=/home/pi/data/btc/chainstate
-ConditionPathExists=/home/pi/data/btc/blocks
-ConditionPathExists=/home/pi/data/lightningd
-ConditionPathExists=/home/pi/data/lightningd/config
 ConditionPathExists=/usr/bin/curl
 
 [Service]
