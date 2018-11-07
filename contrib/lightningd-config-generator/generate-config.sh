@@ -74,6 +74,45 @@ proxy=$PROXY
 autocleaninvoice-cycle=7200
 autocleaninvoice-expired-by=7200
 EOF
+	# Generate lnd.conf (for docker installations)
+	cat <<EOF >./lnd.conf
+[Application Options]
+
+datadir=/root/.lnd/data
+logdir=/root/.lnd/logs
+maxlogfiles=3
+maxlogfilesize=10
+
+tlscertpath=/root/.lnd/tls.cert
+tlskeypath=/root/.lnd/tls.key
+
+adminmacaroonpath=/lnd/admin.macaroon
+readonlymacaroonpath=/lnd/readonly.macaroon
+invoicemacaroonpath=/lnd/invoice.macaroon
+
+
+listen=0.0.0.0:9735
+restlisten=0.0.0.0:8080
+debuglevel=debug
+alias=$NODEALIAS
+
+[Bitcoin]
+bitcoin.active=1
+bitcoin.testnet=0
+bitcoin.mainnet=1
+bitcoin.node=bitcoind
+
+
+
+[Bitcoind]
+bitcoind.rpchost=$IPADDRESS:8332
+bitcoind.rpcuser=$GENERATEDUID
+bitcoind.rpcpass=$GENERATEDPW
+bitcoind.zmqpubrawblock=tcp://$IPADDRESS:28332
+bitcoind.zmqpubrawtx=tcp://$IPADDRESS:28333
+
+
+EOF
 	# Cleanup
 	rm ./generate.txt
 	echo "Generated config file - bitcoin.conf and lightningconfig"
