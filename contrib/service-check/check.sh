@@ -36,8 +36,12 @@ do
 		# OK Docker exists
 		# Check for bitcoind - if data directory exists
 		if [ -d $HOME/data/btc ]; then
-			if $(nc -z -v -w5 $IP 8332); then
-				echo "Bitcoind is alive"
+			if [ $(docker ps | grep -c beyourownbank) == 1 ]; then
+				if $(nc -z -v -w5 $IP 8332); then
+					echo "Bitcoind is fully alive"
+				else
+					echo "Bitcoind is alive but not responding to requests"
+				fi
 			else
 				echo "Starting up bitcoind"
 				docker run --rm \
@@ -48,7 +52,7 @@ do
 					-p 28333:28333 \
 					--name beyourownbank \
 					-d=true \
-				lncm/bitcoind:0.17.0-arm7
+				lncm/bitcoind:0.17.0-arm7			
 			fi	
 		fi
 
@@ -56,10 +60,14 @@ do
 		if [ -d $HOME/data/lightningd ]; then
 			# Also check if the entrypoint file exists
 			if [ -f $HOME/data/ln.sh ]; then
-				if $(nc -z -v -w5 $IP 9735); then
-					echo "Lightning service is online"
+				if [ $(docker ps | grep -c lightningpay) == 1 ]; then
+					if $(nc -z -v -w5 $IP 9735); then
+						echo "Lightningd is fully alive"
+					else
+						echo "Lightningd is alive but not responding to requests yet"
+					fi
 				else
-					echo "Starting up lightning service because offline"
+					echo "Lightningd is offline - starting"
 					docker run -it --rm \
 						--entrypoint="/data/ln.sh" \
 						-v $HOME/data:/data \
@@ -68,7 +76,7 @@ do
 						-d=true \
 						--name lightningpay \
 					lncm/clightning:0.6.1-arm7
-				fi		
+				fi
 			fi	
 		fi	
 	else
