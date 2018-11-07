@@ -44,15 +44,31 @@ do
 				fi
 			else
 				echo "Starting up bitcoind"
-				docker run --rm \
-					-v $HOME/data:/data \
-					-p 8332:8332 \
-					-p 8333:8333 \
-					-p 28332:28332 \
-					-p 28333:28333 \
-					--name beyourownbank \
-					-d=true \
-				lncm/bitcoind:0.17.0-arm7			
+				if [ $(uname -m) == "armv7l" ]; then
+					echo "ARM system detected"
+					docker run --rm \
+						-v $HOME/data:/data \
+						-p 8332:8332 \
+						-p 8333:8333 \
+						-p 28332:28332 \
+						-p 28333:28333 \
+						--name beyourownbank \
+						-d=true \
+					lncm/bitcoind:0.17.0-arm7
+				elif [ $(uname -m) == "x86_64" ]; then
+					echo "x86_64 system detected"
+					docker run --rm \
+						-v $HOME/data:/data \
+						-p 8332:8332 \
+						-p 8333:8333 \
+						-p 28332:28332 \
+						-p 28333:28333 \
+						--name beyourownbank \
+						-d=true \
+					lncm/bitcoind:0.17.0-x64				
+				else
+					echo "System Architecture not supported"	
+				fi			
 			fi	
 		fi
 
@@ -68,14 +84,29 @@ do
 					fi
 				else
 					echo "Lightningd is offline - starting"
-					docker run -it --rm \
-						--entrypoint="/data/ln.sh" \
-						-v $HOME/data:/data \
-						-v $HOME/data/lightningd:/root/.lightning \
-						-p 9735:9735 \
-						-d=true \
-						--name lightningpay \
-					lncm/clightning:0.6.1-arm7
+					if [ $(uname -m) == "armv7l" ]; then
+						echo "ARM system detected"
+						docker run -it --rm \
+							--entrypoint="/data/ln.sh" \
+							-v $HOME/data:/data \
+							-v $HOME/data/lightningd:/root/.lightning \
+							-p 9735:9735 \
+							-d=true \
+							--name lightningpay \
+						lncm/clightning:0.6.1-arm7
+					elif [ $(uname -m) == "x86_64" ]; then
+						echo "x86_64 system detected"
+						docker run -it --rm \
+							--entrypoint="/data/ln.sh" \
+							-v $HOME/data:/data \
+							-v $HOME/data/lightningd:/root/.lightning \
+							-p 9735:9735 \
+							-d=true \
+							--name lightningpay \
+						lncm/clightning:0.6.1-x64					
+					else
+						echo "System architecture not supported"					
+					fi
 				fi
 			fi	
 		fi	
