@@ -1,11 +1,29 @@
-FROM library/ubuntu:18.10
+FROM library/alpine:3.6
 MAINTAINER nolim1t <hello@nolim1t.co>
 
 
 # Install dependencies (boost/zmq)
-RUN apt-get -y -yqq update
-RUN apt-get -yq upgrade
-RUN apt-get install -yq build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils python3 libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-test-dev libboost-thread-dev libzmq3-dev jq pwgen libboost-all-dev git software-properties-common wget unzip autoconf automake libzmq3-dev
+RUN sed -i 's/http\:\/\/dl-cdn.alpinelinux.org/https\:\/\/alpine.global.ssl.fastly.net/g' /etc/apk/repositories
+RUN apk --no-cache add autoconf
+RUN apk --no-cache add automake
+RUN apk --no-cache add boost-dev
+RUN apk --no-cache add build-base
+RUN apk --no-cache add chrpath
+RUN apk --no-cache add file
+RUN apk --no-cache add gnupg
+RUN apk --no-cache add libevent-dev
+RUN apk --no-cache add libressl
+RUN apk --no-cache add libressl-dev
+RUN apk --no-cache add libtool
+RUN apk --no-cache add linux-headers
+RUN apk --no-cache add protobuf-dev
+RUN apk --no-cache add zeromq-dev
+RUN apk add --no-cache jq
+RUN apk add --no-cache pwgen
+RUN apk add --no-cache libboost-all-dev
+RUN apk add --no-cache git
+RUN apk add --no-cache wget
+RUN apk add --no-cache unzip
 
 
 # Grab and build bitcoin

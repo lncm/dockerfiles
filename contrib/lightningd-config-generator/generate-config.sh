@@ -19,6 +19,11 @@ else
 	exit 1
 fi
 
+if [ $(grep -c $GENERATEDUID ./generate.txt ) == 0 ]; then
+	echo "Can't generate credentials - exiting!"
+	exit 1
+fi
+
 if [ -f ./generate.txt ]; then
 	RPCAUTHLINE=`cat ./generate.txt`
 	cat <<EOF >./bitcoin.conf
@@ -115,7 +120,7 @@ bitcoind.zmqpubrawtx=tcp://$IPADDRESS:28333
 EOF
 	# Cleanup
 	rm ./generate.txt
-	echo "Generated config file - bitcoin.conf and lightningconfig"
+	echo "Generated config file - bitcoin.conf, lnd.conf and lightningconfig"
 else
 	echo "Could not generate a config file"
 	exit 1

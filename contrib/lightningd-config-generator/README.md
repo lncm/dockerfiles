@@ -1,5 +1,9 @@
 # Config generator
 
+## What
+
+Generates a **bitcoin.conf** (to be copied to .bitcoin/bitcoin.conf), **lightningconfig** (to be renamed/copied to .lightning/config), and **lnd.conf** (to be copied to .lnd/lnd.conf). With randomly generated RPC credentials so that the services can talk with each other.
+
 ## Usage
 
 
