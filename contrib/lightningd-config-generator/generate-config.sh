@@ -38,7 +38,7 @@ rpcallowip=172.18.0.0/16
 
 
 maxmempool=512
-prune=550
+prune=1500
 maxconnections=40
 maxuploadtarget=5000
 disablewallet=1
