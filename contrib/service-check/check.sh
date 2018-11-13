@@ -123,7 +123,7 @@ do
 					else
 						echo "Bitcoind is dead, start it up"
 						# Start bitcoind
-						bitcoind -daemon					
+						bitcoind -daemon -zmqpubrawblock=tcp://0.0.0.0:28332 -zmqpubrawtx=tcp://0.0.0.0:28333				
 					fi				
 				fi
 			fi
