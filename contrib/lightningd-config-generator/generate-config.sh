@@ -61,7 +61,7 @@ network=bitcoin
 alias=$NODEALIAS
 rgb=000000
 mainnet
-rpc-file=/data/lightningd/lightning-rpc
+rpc-file=$HOME/.lightning/lightning-rpc
 
 bitcoin-rpcconnect=$IPADDRESS
 bitcoin-rpcport=8332
@@ -71,7 +71,7 @@ bitcoin-datadir=/data/btc
 bitcoin-cli=/usr/local/bitcoin/bin/bitcoin-cli
 
 log-level=debug
-log-file=/data/lightningd/debug.log
+log-file=$HOME/.lightning/debug.log
 
 proxy=$PROXY
 
@@ -83,17 +83,17 @@ EOF
 	cat <<EOF >./lnd.conf
 [Application Options]
 
-datadir=/root/.lnd/data
-logdir=/root/.lnd/logs
+datadir=$HOME/.lnd/data
+logdir=$HOME/.lnd/logs
 maxlogfiles=3
 maxlogfilesize=10
 
-tlscertpath=/root/.lnd/tls.cert
-tlskeypath=/root/.lnd/tls.key
+tlscertpath=$HOME/.lnd/tls.cert
+tlskeypath=$HOME/.lnd/tls.key
 
-adminmacaroonpath=/lnd/admin.macaroon
-readonlymacaroonpath=/lnd/readonly.macaroon
-invoicemacaroonpath=/lnd/invoice.macaroon
+adminmacaroonpath=$HOME/.lnd/admin.macaroon
+readonlymacaroonpath=$HOME/.lnd/readonly.macaroon
+invoicemacaroonpath=$HOME/.lnd/invoice.macaroon
 
 
 listen=0.0.0.0:9735
