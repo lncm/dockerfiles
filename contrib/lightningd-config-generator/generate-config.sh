@@ -80,6 +80,8 @@ autocleaninvoice-cycle=7200
 autocleaninvoice-expired-by=7200
 EOF
 	# Generate lnd.conf (for docker installations)
+	# To Query:
+	# lncli --lnddir=~/.lnd --macaroonpath=~/.lnd/admin.macaroon getinfo
 	cat <<EOF >./lnd.conf
 [Application Options]
 
@@ -90,6 +92,7 @@ maxlogfilesize=10
 
 tlscertpath=$HOME/.lnd/tls.cert
 tlskeypath=$HOME/.lnd/tls.key
+noseedbackup=1
 
 adminmacaroonpath=$HOME/.lnd/admin.macaroon
 readonlymacaroonpath=$HOME/.lnd/readonly.macaroon
