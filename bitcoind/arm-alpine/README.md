@@ -6,6 +6,10 @@ This dockerfile is based on [ruimarinho/docker-bitcoin-core](https://github.com/
 
 I've also removed the entrypoint has that has some issues, and replaced it to work without.
 
+## Need a bitcoin config file?
+
+Use one of my [scripts](https://gitlab.com/nolim1t/financial-independence/tree/master/contrib/lightningd-config-generator) or [scripts(1)](https://github.com/lncm/dockerfiles/tree/master/contrib/lightningd-config-generator) which generates a bitcoin.conf and matching lightning conf.
+
 
 ## Invocation
 
