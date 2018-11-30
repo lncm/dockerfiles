@@ -12,12 +12,15 @@ RUN apk --no-cache add build-base
 RUN apk --no-cache add gmp-dev
 RUN apk --no-cache add sqlite-dev
 RUN apk --no-cache add python3
+RUN apk --no-cache add python
 RUN apk --no-cache add net-tools
 RUN apk --no-cache add zlib-dev
 
 RUN apk --no-cache add git
 
 RUN apk --no-cache add libtool
+
+ENV PATH=/opt/bitcoin-0.17.0/bin:/usr/bin:$PATH
 
 # Build lightningd
 RUN git clone https://github.com/ElementsProject/lightning.git
@@ -31,6 +34,8 @@ RUN make install
 
 # After being built
 FROM alpine
+
+ENV PATH=/opt/bitcoin-0.17.0/bin:/usr/bin:$PATH
 
 EXPOSE 9735
 
