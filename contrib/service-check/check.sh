@@ -54,7 +54,7 @@ do
 						-p 28333:28333 \
 						--name beyourownbank \
 						-d=true \
-					lncm/bitcoind:0.17.0-arm7
+                    lncm/bitcoind:0.17.0-alpine-arm7
 				elif [ $(uname -m) == "x86_64" ]; then
 					echo "x86_64 system detected"
 					docker run --rm \
