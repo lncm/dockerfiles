@@ -94,7 +94,6 @@ do
 						  --entrypoint="/data/ln.sh" \
 						  --name lightningpay \
 						lncm/clightning:0.6.1-alpine-arm7
-						docker start lightningpay
 					elif [ $(uname -m) == "x86_64" ]; then
 						echo "x86_64 system detected"
 						docker run -it --rm \
