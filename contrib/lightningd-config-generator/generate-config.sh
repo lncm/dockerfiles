@@ -68,7 +68,7 @@ bitcoin-rpcport=8332
 bitcoin-rpcuser=$GENERATEDUID
 bitcoin-rpcpassword=$GENERATEDPW
 bitcoin-datadir=/data/btc
-bitcoin-cli=/usr/local/bitcoin/bin/bitcoin-cli
+bitcoin-cli=/opt/bitcoin-0.17.0/bin/bitcoin-cli
 
 log-level=debug
 log-file=$HOME/.lightning/debug.log
