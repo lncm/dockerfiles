@@ -2,7 +2,7 @@
 
 if [ -d /home/pi ]; then
 	exec > /home/pi/service-check.log 2>&1
-	set -x	
+	set -x
 else
 	exec > $HOME/service-check.log 2>&1
 	set -x
@@ -65,11 +65,11 @@ do
 						-p 28333:28333 \
 						--name beyourownbank \
 						-d=true \
-					lncm/bitcoind:0.17.0-x64				
+					lncm/bitcoind:0.17.0-x64
 				else
-					echo "System Architecture not supported"	
-				fi			
-			fi	
+					echo "System Architecture not supported"
+				fi
+			fi
 		fi
 
 		# Check for lightningd - If directory Exists
@@ -93,7 +93,7 @@ do
 							-p 9735:9735 \
 							-d=true \
 							--name lightningpay \
-						lncm/clightning:0.6.1-arm7
+						lncm/clightning:0.6.1-alpine-arm7
 					elif [ $(uname -m) == "x86_64" ]; then
 						echo "x86_64 system detected"
 						docker run -it --rm \
@@ -103,13 +103,13 @@ do
 							-p 9735:9735 \
 							-d=true \
 							--name lightningpay \
-						lncm/clightning:0.6.1-x64					
+						lncm/clightning:0.6.1-x64
 					else
-						echo "System architecture not supported"					
+						echo "System architecture not supported"
 					fi
 				fi
-			fi	
-		fi	
+			fi
+		fi
 	else
 		echo "Docker does not exist"
 		# try to launch other ways
@@ -123,8 +123,8 @@ do
 					else
 						echo "Bitcoind is dead, start it up"
 						# Start bitcoind
-						bitcoind -daemon -zmqpubrawblock=tcp://0.0.0.0:28332 -zmqpubrawtx=tcp://0.0.0.0:28333				
-					fi				
+						bitcoind -daemon -zmqpubrawblock=tcp://0.0.0.0:28332 -zmqpubrawtx=tcp://0.0.0.0:28333
+					fi
 				fi
 			fi
 		else
@@ -158,7 +158,7 @@ do
 						# TODO: run lnd without unlocking or create wallet bullshit when I figure that out
 					fi
 				else
-					echo "LND not configured skipping"		
+					echo "LND not configured skipping"
 				fi
 			fi
 		else
