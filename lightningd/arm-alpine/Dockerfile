@@ -1,4 +1,4 @@
-FROM lncm/bitcoind:0.17.0-alpine-arm7  as builder
+FROM lncm/bitcoind:0.17.0-alpine-arm7
 MAINTAINER nolim1t <hello@nolim1t.co>
 
 WORKDIR /source
@@ -32,10 +32,6 @@ RUN make
 RUN make install
 # lightningd build
 
-# After being built
-FROM alpine as final
-
-ENV PATH=/bin:/usr/local/bin:/opt/bitcoin-0.17.0/bin:/usr/bin:$PATH
 
 EXPOSE 9735
 
