@@ -54,7 +54,7 @@ do
 						-p 28333:28333 \
 						--name beyourownbank \
 						-d=true \
-                    lncm/bitcoind:0.17.0-alpine-arm7
+            lncm/bitcoind:0.17.0-alpine-arm7
 				elif [ $(uname -m) == "x86_64" ]; then
 					echo "x86_64 system detected"
 					docker run --rm \
@@ -87,12 +87,12 @@ do
 					if [ $(uname -m) == "armv7l" ]; then
 						echo "ARM system detected"
 						docker run -it --rm \
-							--entrypoint="/data/ln.sh" \
-							-v $HOME/data:/data \
-							-v $HOME/data/lightningd:/root/.lightning \
-							-p 9735:9735 \
-							-d=true \
-							--name lightningpay \
+						  -v $HOME/data:/data \
+						  -v $HOME/data/lightningd:/root/.lightning \
+						  -p 9735:9735 \
+						  -d=true \
+						  --entrypoint="/data/ln.sh" \
+						  --name lightningpay \
 						lncm/clightning:0.6.1-alpine-arm7
 					elif [ $(uname -m) == "x86_64" ]; then
 						echo "x86_64 system detected"
