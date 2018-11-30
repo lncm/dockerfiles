@@ -20,7 +20,7 @@ RUN apk --no-cache add git
 
 RUN apk --no-cache add libtool
 
-ENV PATH=/opt/bitcoin-0.17.0/bin:/usr/bin:$PATH
+ENV PATH=/bin:/usr/local/bin:/opt/bitcoin-0.17.0/bin:/usr/bin:$PATH
 
 # Build lightningd
 RUN git clone https://github.com/ElementsProject/lightning.git
@@ -35,7 +35,7 @@ RUN make install
 # After being built
 FROM alpine
 
-ENV PATH=/opt/bitcoin-0.17.0/bin:/usr/bin:$PATH
+ENV PATH=/bin:/usr/local/bin:/opt/bitcoin-0.17.0/bin:/usr/bin:$PATH
 
 EXPOSE 9735
 
