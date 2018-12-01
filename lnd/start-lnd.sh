@@ -59,19 +59,5 @@ exec lnd \
     --noseedbackup \
     --lnddir="/lnd" \
     --configfile="/lnd/lnd.conf" \
-    --logdir="/data" \
-    "--alias=$ALIAS" \
-    "--$CHAIN.active" \
-    "--$CHAIN.$NETWORK" \
-    "--$CHAIN.node"="bitcoind" \
-    "--$BACKEND.rpchost"="$RPCHOST" \
-    "--$BACKEND.rpcuser"="$RPCUSER" \
-    "--$BACKEND.rpcpass"="$RPCPASS" \
-    "--bitcoind.zmqpubrawblock=tcp://$ZMQPUBRAWBLOCK" \
-    "--bitcoind.zmqpubrawtx=tcp://$ZMQPUBRAWTX" \
-    "--rpclisten=0.0.0.0:10009" \
-    "--rpclisten=127.0.0.1:10008" \
-    "--restlisten=0.0.0.0:8080" \
-    "--listen=0.0.0.0:10008" \
-    --debuglevel="$DEBUG" \
+    --debuglevel="$DEBUG"
     "$@"
