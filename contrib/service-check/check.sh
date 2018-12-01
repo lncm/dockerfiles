@@ -46,12 +46,13 @@ do
 				echo "Starting up bitcoind"
 				if [ $(uname -m) == "armv7l" ]; then
 					echo "ARM system detected"
-					docker run --rm \
-						-v $HOME/data:/data \
-						-p 8332:8332 \
-						-p 8333:8333 \
-						-p 28332:28332 \
-						-p 28333:28333 \
+					docker run -it --rm \
+						-v $HOME/data/btc:/home/bitcoin/.bitcoin \
+						-v $HOME/data/btc:/root/.bitcoin \
+						-p 0.0.0.0:8332:8332 \
+						-p 0.0.0.0:8333:8333 \
+						-p 0.0.0.0:28332:28332 \
+						-p 0.0.0.0:28333:28333 \
 						--name beyourownbank \
 						-d=true \
             lncm/bitcoind:0.17.0-alpine-arm7
