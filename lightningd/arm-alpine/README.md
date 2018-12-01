@@ -13,7 +13,7 @@ cp ../../ln.sh ~/data
 docker run -it --rm \
   -v $HOME/data:/data \
   -v $HOME/data/lightningd:/root/.lightning \
-  -p 9735:9735 \
+  -p 0.0.0.0:9735:9735 \
   -d=true \
   --entrypoint="/data/ln.sh" \  
   --name lightningpay \

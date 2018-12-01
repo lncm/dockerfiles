@@ -24,12 +24,11 @@ BITCOIN_PATH=/home/pi/data/btc
 # Run image
 docker run -it --rm \
     -v $BITCOIN_PATH:/home/bitcoin/.bitcoin \
-    -p 8332:8332 \
-    -p 8333:8333 \
-    -p 28333:28333 \
-    -p 28332:28332 \
+    -p 0.0.0.0:8332:8332 \
+    -p 0.0.0.0:8333:8333 \
+    -p 0.0.0.0:28333:28333 \
+    -p 0.0.0.0:28332:28332 \
     --name beyourownbank \
     -d=true \
     lncm/bitcoind:0.17.0-alpine-arm7
 ```
-
