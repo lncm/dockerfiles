@@ -26,6 +26,8 @@ fi
 
 if [ -f ./generate.txt ]; then
 	RPCAUTHLINE=`cat ./generate.txt`
+
+	# Generate bitcoin configuration
 	cat <<EOF >./bitcoin.conf
 server=1
 rest=1
@@ -48,6 +50,32 @@ bind=0.0.0.0
 
 port=8333
 rpcport=8332
+$RPCAUTHLINE
+EOF
+
+	# Generate Litecoin configuration
+	cat <<EOF >./litecoin.conf
+server=1
+rest=1
+rpcallowip=127.0.0.1
+rpcallowip=192.168.0.1/24
+rpcallowip=192.168.1.1/24
+rpcallowip=10.0.0.0/8
+rpcallowip=172.16.0.0/12
+rpcallowip=172.18.0.0/16
+
+
+maxmempool=512
+prune=1500
+maxconnections=40
+maxuploadtarget=5000
+disablewallet=1
+
+listen=1
+bind=0.0.0.0
+
+port=9333
+rpcport=9332
 $RPCAUTHLINE
 EOF
 
