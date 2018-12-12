@@ -14,16 +14,32 @@ Use one of my [scripts](https://gitlab.com/nolim1t/financial-independence/tree/m
 ## Invocation
 
 ```bash
+# Install dependencies (Alpine)
+apk add pwgen
+apk add curl
+apk add bash
+apk add python3
+
+# Go to lncm directory (Alpine)
+cd /home/lncm
+
+# Generate config
+curl "https://gitlab.com/nolim1t/financial-independence/raw/master/contrib/lightningd-config-generator/generate-config.sh" 2>/dev/null | bash
+
+mkdir .bitcoin
+mv bitcoin.conf .bicoin
+mkdir .lnd
+mv lnd.conf .lnd
+mkdir .lightning
+mv lightningconfig .lightning/config
+
+
 # Grab image (arm)
 docker pull lncm/bitcoind:0.17.0-alpine-arm7
 
-# Run image
-# Set local bitcoin path
-BITCOIN_PATH=/home/pi/data/btc
-
-# Run image
+# Run image (map lncm/.bitcoin to bitcoin/.bitcoin)
 docker run -it --rm \
-    -v $BITCOIN_PATH:/home/bitcoin/.bitcoin \
+    -v /home/lncm/.bitcoin:/home/bitcoin/.bitcoin \
     -p 0.0.0.0:8332:8332 \
     -p 0.0.0.0:8333:8333 \
     -p 0.0.0.0:28333:28333 \
@@ -31,4 +47,5 @@ docker run -it --rm \
     --name beyourownbank \
     -d=true \
     lncm/bitcoind:0.17.0-alpine-arm7
+
 ```
