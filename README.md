@@ -84,6 +84,9 @@ docker pull lncm/bitcoind:0.16.3-arm6
 # ARMv7 (64-bit Raspberry Pi: 2 v1.2 / 3 / 3+)
 docker pull lncm/bitcoind:0.16.3-arm7
 docker pull lncm/bitcoind:0.17.0-arm7
+
+# ARMv7 (Raspberry PI + Alpine)
+docker pull lncm/bitcoind:0.17.0-alpine-arm7
 ```
 
 **c-lightning (lightningd)**
