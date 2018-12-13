@@ -11,7 +11,7 @@ services:
             - "28333:28333"
         networks:
             localnet:
-                ipv4_address: 172.16.1.5
+                ipv4_address: 172.16.88.8
     paymentprocessor:
         image: nolim1t/lightningd:x86_64-201809161814
         volumes:
@@ -19,12 +19,12 @@ services:
         ports:
             - "9735:9735"
         environment:
-            - RPCHOST=172.16.1.5
+            - RPCHOST=172.16.88.8
             - RPCUSER=btcuser
             - RPCPASSWORD=defaultpassword
         networks:
             localnet:
-                ipv4_address: 172.16.1.10
+                ipv4_address: 172.16.88.9
         depends_on:
             - btcbox
 networks:
@@ -34,4 +34,4 @@ networks:
             driver: default
             config:
                 -
-                    subnet: 172.16.1.0/24
+                    subnet: 172.16.88.0/24
