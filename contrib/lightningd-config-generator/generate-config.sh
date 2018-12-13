@@ -153,32 +153,32 @@ EOF
 	cat <<EOF >./docker-compose.yml
 version: '2.1'
 services:
-    btcbox:
-        image: lncm/bitcoind:0.17.0-alpine-arm7
-        volumes:
-            - /home/lncm/.bitcoin:/home/bitcoin/.bitcoin
-        ports:
-            - "8332:8332"
-            - "8333:8333"
-            - "28332:28332"
-            - "28333:28333"
+	btcbox:
+		image: lncm/bitcoind:0.17.0-alpine-arm7
+		volumes:
+			- /home/lncm/.bitcoin:/home/bitcoin/.bitcoin
+		ports:
+			- "8332:8332"
+			- "8333:8333"
+			- "28332:28332"
+			- "28333:28333"
 		expose:
 			- "8333"
 		environment:
 			- BITCOINRPCHOST=btcbox
 			- BITCOINRPCUSER=$GENERATEDUID
 			- BITCOINRPCPASS=$GENERATEDPW
-        networks:
-            localnet:
-                ipv4_address: 172.16.88.8
+		networks:
+			localnet:
+				ipv4_address: 172.16.88.8
 networks:
-    localnet:
-        driver: bridge
-        ipam:
-            driver: default
-            config:
-                -
-                    subnet: 172.16.88.0/24
+	localnet:
+		driver: bridge
+		ipam:
+			driver: default
+			config:
+				-
+					subnet: 172.16.88.0/24
 
 EOF
 
