@@ -170,13 +170,13 @@ services:
             localnet:
                 ipv4_address: 172.16.88.8
 networks:
-	localnet:
-		driver: bridge
-		ipam:
-			driver: default
-			config:
-				-
-					subnet: 172.16.88.0/24
+    localnet:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                -
+                    subnet: 172.16.88.0/24
 
 EOF
 
