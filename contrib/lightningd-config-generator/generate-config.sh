@@ -82,7 +82,7 @@ EOF
 	IPADDRESS=`ip route get 1 | awk '{print $NF;exit}'`
 	echo "$IPADDRESS" > $HOME/.ipaddress.txt
 	PROXY="$(echo $IPADDRESS):9050"
-	NODEALIAS='LNCM BOX Default #reckless'
+	NODEALIAS='LNCM BOX Default'
 
 	cat <<EOF >./lightningconfig
 network=bitcoin
@@ -113,18 +113,18 @@ EOF
 	cat <<EOF >./lnd.conf
 [Application Options]
 
-datadir=$HOME/.lnd/data
-logdir=$HOME/.lnd/logs
+datadir=/home/lncm/.lnd/data
+logdir=/home/lncm/.lnd/logs
 maxlogfiles=3
 maxlogfilesize=10
 
-tlscertpath=$HOME/.lnd/tls.cert
-tlskeypath=$HOME/.lnd/tls.key
+tlscertpath=/home/lncm/.lnd/tls.cert
+tlskeypath=/home/lncm/.lnd/tls.key
 noseedbackup=1
 
-adminmacaroonpath=$HOME/.lnd/admin.macaroon
-readonlymacaroonpath=$HOME/.lnd/readonly.macaroon
-invoicemacaroonpath=$HOME/.lnd/invoice.macaroon
+adminmacaroonpath=/home/lncm/.lnd/admin.macaroon
+readonlymacaroonpath=/home/lncm/.lnd/readonly.macaroon
+invoicemacaroonpath=/home/lncm/.lnd/invoice.macaroon
 
 
 listen=0.0.0.0:9735
@@ -141,17 +141,50 @@ bitcoin.node=bitcoind
 
 
 [Bitcoind]
-bitcoind.rpchost=$IPADDRESS:8332
+bitcoind.rpchost=btcbox:8332
 bitcoind.rpcuser=$GENERATEDUID
 bitcoind.rpcpass=$GENERATEDPW
-bitcoind.zmqpubrawblock=tcp://$IPADDRESS:28332
-bitcoind.zmqpubrawtx=tcp://$IPADDRESS:28333
+bitcoind.zmqpubrawblock=tcp://btcbox:28332
+bitcoind.zmqpubrawtx=tcp://btcbox:28333
 
 
 EOF
+	# Generate docker-compose.yml
+	cat <<EOF >./docker-compose.yml
+version: '2.1'
+services:
+    btcbox:
+        image: lncm/bitcoind:0.17.0-alpine-arm7
+        volumes:
+            - /home/lncm/.bitcoin:/home/bitcoin/.bitcoin
+        ports:
+            - "8332:8332"
+            - "8333:8333"
+            - "28332:28332"
+            - "28333:28333"
+		expose:
+			- "8333"
+		environment:
+			- BITCOINRPCHOST=btcbox
+			- BITCOINRPCUSER=$GENERATEDUID
+			- BITCOINRPCPASS=$GENERATEDPW
+        networks:
+            localnet:
+                ipv4_address: 172.16.88.8
+networks:
+    localnet:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                -
+                    subnet: 172.16.88.0/24
+
+EOF
+
 	# Cleanup
 	rm ./generate.txt
-	echo "Generated config file - bitcoin.conf, lnd.conf and lightningconfig"
+	echo "Generated config file - bitcoin.conf, litecoin.conf, lnd.conf,lightningconfig and docker-compose.yml"
 else
 	echo "Could not generate a config file"
 	exit 1
