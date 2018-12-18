@@ -10,8 +10,8 @@ Tested to work on Alpine ARM.
 
 Requires docker and git
 ```bash
-chmod +x make_img.sh
-./make_img.sh
+chmod +x build_lnd.sh
+./build_lnd.sh
 ```
 
 ### Docker Run
