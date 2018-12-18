@@ -1,16 +1,17 @@
 # LND Docker file
 
-Not maintaining this dockerfile anymore, so please use the [Official Docker file](https://github.com/lightningnetwork/lnd/tree/master/docker/lnd)
+This script builds official [Lightning Labs LND](https://github.com/lightningnetwork/lnd/) container for Docker.
+
+Tested to work on Alpine ARM.
 
 ## Official Dockerfile Instructions
 
-### Docker Build
+### Building
 
+Requires docker and git
 ```bash
-git clone https://github.com/lightningnetwork/lnd.git
-cd lnd/docker
-git checkout v0.5.1-beta
-docker build -t nolim1t/lnd:official-0.5.1 .
+chmod +x make_img.sh
+./make_img.sh
 ```
 
 ### Docker Run
@@ -18,22 +19,11 @@ docker build -t nolim1t/lnd:official-0.5.1 .
 #### Fetching
 
 ```docker
-docker pull nolim1t/lnd:official-0.5.1
+docker pull lncm/lnd:latest
 ```
 
 #### Running
 
 ```docker
-LNDPATH=$HOME/.lnd
-
-docker run -it --rm \
-  -v $LNDPATH:/root/.bitcoin \
-  -e CHAIN=bitcoin \
-  -e NETWORK=mainnet \
-  -e RPCUSER=lightning \
-  -e RPCPASS=lightningpass \
-  -p 0.0.0.0:9735:9735 \
-  -d=true \
-  --name lndpay \
-  nolim1t/lnd:official-0.5.1 --lnddir=/root/.lnd
+docker run -v /root/lnd_data:/lnd --network host --rm -it lncm/lnd:latest
 ```
