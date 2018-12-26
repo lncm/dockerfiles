@@ -2,9 +2,10 @@
 
 ## About
 
-This dockerfile is based on [ruimarinho/docker-bitcoin-core](https://github.com/ruimarinho/docker-bitcoin-core/blob/master/0.17/alpine/Dockerfile) however its made to work for raspberry pi installs, and also has wallet disabled.
+This dockerfile is based on [ruimarinho/docker-bitcoin-core](https://github.com/ruimarinho/docker-bitcoin-core/blob/master/0.17/alpine/Dockerfile) however its made to work for raspberry pi installs, and also has wallet disabled. This also builds on x86_64 environment too.
 
 I've also removed the entrypoint has that has some issues, and replaced it to work without.
+
 
 ## Need a bitcoin config file?
 
