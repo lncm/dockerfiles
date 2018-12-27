@@ -1,11 +1,17 @@
 #!/bin/sh
 
-# This script builds the official lnd container and tags it
+# This script builds the official lnd container and tags it to whatever VER is set to
 
 VER=latest
 
 # for alpine
-apk add git
+if [ $(. /etc/os-release; echo "$ID") == 'raspbian' ]; then
+    apt-get install -y git
+elif [ $(. /etc/os-release; echo "$ID") == 'alpine' ]; then
+    apk add git
+else
+    echo 'Can not determine system''
+fi
 
 
 git clone https://github.com/lightningnetwork/lnd.git
