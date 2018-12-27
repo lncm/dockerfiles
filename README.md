@@ -85,8 +85,11 @@ docker pull lncm/bitcoind:0.16.3-arm6
 docker pull lncm/bitcoind:0.16.3-arm7
 docker pull lncm/bitcoind:0.17.0-arm7
 
-# ARMv7 (Raspberry PI + Alpine)
+# ARMv7 (Raspberry PI + Alpine .. seems to work on both)
 docker pull lncm/bitcoind:0.17.0-alpine-arm7
+
+# 0.17.1 - ARMv6 (Raspberry PI + Alpine.. Seems to work on both)
+docker pull lncm/bitcoind:0.17.1-alpine-arm
 ```
 
 **c-lightning (lightningd)**
