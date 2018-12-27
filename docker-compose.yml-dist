@@ -9,24 +9,26 @@ services:
             - "8333:8333"
             - "28332:28332"
             - "28333:28333"
+        environment:
+            - BITCOINRPCHOST=btcbox
+            - BITCOINRPCUSER=RANDOMUSER
+            - BITCOINRPCPASS=RANDOMPASS
         networks:
             localnet:
                 ipv4_address: 172.16.88.8
-    paymentprocessor:
-        image: nolim1t/lightningd:x86_64-201809161814
+    lightningbox:
+        image: lncm/lnd:latest
+        command: --lnddir=/lnd
         volumes:
-            - /path/to/btc-data:/data
+            - /home/lncm/.lnd:/root/.lnd
         ports:
             - "9735:9735"
-        environment:
-            - RPCHOST=172.16.88.8
-            - RPCUSER=btcuser
-            - RPCPASSWORD=defaultpassword
-        networks:
-            localnet:
-                ipv4_address: 172.16.88.9
         depends_on:
             - btcbox
+        restart: on-failure
+        networks:
+            localnet:
+                ipv4_address: 172.16.88.88
 networks:
     localnet:
         driver: bridge
@@ -35,3 +37,4 @@ networks:
             config:
                 -
                     subnet: 172.16.88.0/24
+
