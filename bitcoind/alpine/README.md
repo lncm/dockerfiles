@@ -41,6 +41,10 @@ docker pull lncm/bitcoind:0.17.0-alpine-arm7
 # Grab Image (x86_64 / 0.17.1)
 docker pull lncm/bitcoind:0.17.1-x86_64
 
+# Grab image (arm / 0.17.1)
+docker pull lncm/bitcoind:0.17.1-alpine-arm
+
+
 # Run image (map lncm/.bitcoin to bitcoin/.bitcoin)
 docker run -it --rm \
     -v /home/lncm/.bitcoin:/home/bitcoin/.bitcoin \
