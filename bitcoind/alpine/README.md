@@ -47,13 +47,17 @@ docker pull lncm/bitcoind:0.17.1-alpine-arm
 
 # Run image (map lncm/.bitcoin to bitcoin/.bitcoin)
 docker run -it --rm \
-    -v /home/lncm/.bitcoin:/home/bitcoin/.bitcoin \
+    -v $HOME/.bitcoin:/home/bitcoin/.bitcoin \
     -p 0.0.0.0:8332:8332 \
     -p 0.0.0.0:8333:8333 \
     -p 0.0.0.0:28333:28333 \
     -p 0.0.0.0:28332:28332 \
-    --name beyourownbank \
+    --name btcbox \
     -d=true \
-    lncm/bitcoind:0.17.0-alpine-arm7
+    lncm/bitcoind:0.17.1-alpine-arm
 
 ```
+
+## Supported platforms
+
+Both x86 and arm are supported with this docker file.
