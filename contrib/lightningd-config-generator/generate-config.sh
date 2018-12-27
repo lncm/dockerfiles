@@ -113,24 +113,25 @@ EOF
 	cat <<EOF >./lnd.conf
 [Application Options]
 
-datadir=/home/lncm/.lnd/data
-logdir=/home/lncm/.lnd/logs
 maxlogfiles=3
 maxlogfilesize=10
 
-tlscertpath=/home/lncm/.lnd/tls.cert
-tlskeypath=/home/lncm/.lnd/tls.key
-noseedbackup=1
+; DANGER ZONE. You won't be able to easily restore wallets with this uncommented 
+; noseedbackup=1
 
-adminmacaroonpath=/home/lncm/.lnd/admin.macaroon
-readonlymacaroonpath=/home/lncm/.lnd/readonly.macaroon
-invoicemacaroonpath=/home/lncm/.lnd/invoice.macaroon
 
 
 listen=0.0.0.0:9735
 restlisten=0.0.0.0:8080
 debuglevel=debug
 alias=$NODEALIAS
+
+; The color of the node in hex format, used to customize node appearance in
+; intelligence services.
+color=#000000
+
+; The maximum number of incoming pending channels permitted per peer.
+maxpendingchannels=3
 
 [Bitcoin]
 bitcoin.active=1
@@ -154,7 +155,7 @@ EOF
 version: '2.1'
 services:
     btcbox:
-        image: lncm/bitcoind:0.17.0-alpine-arm7
+        image: lncm/bitcoind:0.17.1-alpine-arm
         volumes:
             - /home/lncm/.bitcoin:/home/bitcoin/.bitcoin
         ports:
