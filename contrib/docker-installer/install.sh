@@ -1,6 +1,5 @@
-SYSTEM=`uname -v`
-if [ $(echo $SYSTEM | grep -ic alpine) == 0 ]; then
-    echo "Non-Alpine System (Probably Raspbian)"
+if [ $(. /etc/os-release; echo "$ID") == 'raspbian' ]; then
+    echo "Raspbian System"
     sudo apt update && \
     sudo apt install -y apt-transport-https \
         ca-certificates \
