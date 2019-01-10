@@ -4,7 +4,7 @@
 
 ### Copy static file
 
-Copy index.html to this directory
+Make directory called ```static``` and then copy index.html and any static assets there
 
 ### Run build command
 
