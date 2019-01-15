@@ -3,8 +3,10 @@ FROM golang:alpine as builder
 RUN apk add --no-cache --update alpine-sdk \
     make
 
+# First make the directory
 RUN mkdir -p /src/
-COPY ./ /src/
+# This should contain all the source files for invoicer!
+COPY ./invoicer /src/
 WORKDIR /src/
 
 RUN make bin/invoicer
