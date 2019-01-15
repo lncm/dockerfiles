@@ -3,10 +3,8 @@ FROM golang:alpine as builder
 RUN apk add --no-cache --update alpine-sdk \
     make
 
-# First make the directory
 RUN mkdir -p /src/
-# This should contain all the source files for invoicer!
-COPY ./invoicer /src/
+COPY ./ /src/
 WORKDIR /src/
 
 RUN make bin/invoicer
@@ -37,6 +35,10 @@ RUN chmod 755 /bin/check-invoicer.sh
 
 # Expose Invoicer port
 EXPOSE 8080
+
+# Health Check line
+HEALTHCHECK --interval=1m --timeout=20s \
+    CMD /bin/check-invoicer.sh || exit 1
 
 # Invoicer Entrypoint
 ENTRYPOINT entrypoint-invoicer.sh
