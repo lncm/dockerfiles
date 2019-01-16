@@ -9,6 +9,7 @@ Make directory called ```static``` and then copy index.html and any static asset
 ### Run build command
 
 ```bash
+git clone https://github.com/lncm/invoicer.git ./invoicer
 docker build -t lncm/invoicer:VERSION-arm .
 ```
 
