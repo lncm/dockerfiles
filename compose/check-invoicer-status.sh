@@ -18,13 +18,15 @@ if [ "$(id -u)" -ne "0" ]; then
     exit 1
 fi
 
-if [ $(docker inspect $BOXNAME | jq '.[0].State.Health.Status' | sed 's/"//g; ') == "healthy" ]; then
-    echo "OK"
-    exit 0
-else
-    echo "Attempting to restart $BOXNAME"
-    docker stop $BOXNAME
-    docker start $BOXNAME
-    exit 0
+if [ $(docker inspect $BOXNAME | jq '.[0].State.Status' | sed 's/"//g; ') == "running" ]; then
+    if [ $(docker inspect $BOXNAME | jq '.[0].State.Health.Status' | sed 's/"//g; ') == "healthy" ]; then
+        echo "All good"
+        exit 0
+    else
+        echo "Attempting to restart $BOXNAME"
+        docker stop $BOXNAME
+        docker start $BOXNAME
+        exit 0
+    fi
 fi
 
